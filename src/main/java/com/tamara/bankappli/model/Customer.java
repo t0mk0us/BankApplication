@@ -17,8 +17,7 @@ public class Customer {
 		    PERSON,
 		    ENTERPRISE
 		  }
-	
-	  
+		  
 	@Id @GeneratedValue
 	@Column(name = "id")  
 	private String ID;
@@ -37,8 +36,7 @@ public class Customer {
 	
 	@Column(name = "date_of_birth")
 	private Date DOB;
-	
-	
+		
 	public String getFirstName() {
 		return firstName;
 	}
@@ -69,5 +67,4 @@ public class Customer {
 	public void setDOB(Date dOB) {
 		DOB = dOB;
 	}
-
 }

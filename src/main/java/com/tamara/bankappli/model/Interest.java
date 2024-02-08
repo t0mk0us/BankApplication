@@ -17,5 +17,4 @@ public class Interest {
 	public void setRate(float rate) {
 		this.rate = rate;
 	}
-
 }

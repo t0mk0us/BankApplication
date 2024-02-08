@@ -84,7 +84,5 @@ public class Address {
 	}
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
-	}
-
-	
+	}	
 }

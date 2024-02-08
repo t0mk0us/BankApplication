@@ -11,5 +11,4 @@ public class Saving extends Account{
 	public void setInterest(float interest) {
 		Interest = interest;
 	}
-
 }

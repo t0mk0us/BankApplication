@@ -19,8 +19,7 @@ public class Currency {
 	
 	@Column(name = "name")  
 	private String name;
-	
-	
+		
 	public String getID() {
 		return ID;
 	}
@@ -39,5 +38,4 @@ public class Currency {
 	public void setName(String name) {
 		this.name = name;
 	}
-
 }

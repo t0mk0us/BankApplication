@@ -6,9 +6,7 @@ public class Person extends Customer{
 	
 	  enum Sex {
 		    FEMALE,
-		    MALE;
-		  
-		  
+		    MALE;		  
 		  }
 	  
 	private String firstName;
@@ -35,7 +33,6 @@ public class Person extends Customer{
 	public void setPlaceOfWork(String placeOfWork) {
 		this.placeOfWork = placeOfWork;
 	}
-
 	public Date getDOB() {
 		return DOB;
 	}
@@ -47,7 +44,5 @@ public class Person extends Customer{
 	}
 	public void setSex(Sex sex) {
 		this.sex = sex;
-	}
-
-	
+	}	
 }

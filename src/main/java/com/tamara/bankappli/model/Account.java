@@ -24,27 +24,22 @@ public class Account {
 		    AMERICAN_DOLLAR,
 		    CANADIAN_DOLLAR,
 		    EURO,
-		  	JAPANESE_YEN;
+		    JAPANESE_YEN;
 		  }
-	
-	 
+		 
 	@Id @GeneratedValue
 	@Column(name = "id")  
 	private long ID;
 
-	@Id @GeneratedValue
 	@Column(name = "owner")
 	private Customer owner;
 	
-	@Id @GeneratedValue
 	@Column(name = "currency")
 	private Currency currency;
 	
-	@Id @GeneratedValue
 	@Column(name = "balance")
 	private Float balance;
 	
-	@Id @GeneratedValue
 	@Column(name = "account_type")
 	private AccountType type;
 	

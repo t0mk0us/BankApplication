@@ -10,6 +10,5 @@ public class Chequing extends Account{
 
 	public void setInterest(float interest) {
 		Interest = interest;
-	}
-	
+	}	
 }

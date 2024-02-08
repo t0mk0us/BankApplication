@@ -34,13 +34,12 @@ public class AccountController<AccountService> {
 	
 	public static final String CONTEXT_V1_ACCOUNT = CONTEXT_1 + "address";
 
-
 	@Autowired
 	AccountService accountService;
 
     @SuppressWarnings("unchecked")
 	//@Public
-    @GetMapping("/lister")
+    @GetMapping("/list")
     @ApiOperation(value = "Lister les comptes")
     // @formatter:off
     @ApiResponses({
@@ -52,8 +51,8 @@ public class AccountController<AccountService> {
     	return new ResponseEntity<>(((com.tamara.bankappli.service.AccountService) accountService).getAll(), HttpStatus.OK);
     }
     
-   // @Public
-    @GetMapping("/trouver")
+    // @Public
+    @GetMapping("/find")
     @ApiOperation(value = "Trouver un compte par id")
     // @formatter:off
     @ApiResponses({

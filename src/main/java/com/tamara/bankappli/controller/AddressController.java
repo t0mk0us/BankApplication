@@ -41,7 +41,7 @@ public class AddressController {
 
     @SuppressWarnings("unchecked")
 	//@Public
-    @GetMapping("/lister")
+    @GetMapping("/list")
     // @formatter:off
     @ApiResponses({
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
