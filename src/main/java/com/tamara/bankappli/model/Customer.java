@@ -13,10 +13,10 @@ import jakarta.persistence.Table;
 @Table(name = "CUSTOMER")
 public class Customer {
 	
-	  enum customerType {
-		    PERSON,
-		    ENTERPRISE
-		  }
+	enum customerType {
+		PERSON,
+		ENTERPRISE
+	}
 		  
 	@Id @GeneratedValue
 	@Column(name = "id")  

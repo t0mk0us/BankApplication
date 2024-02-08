@@ -14,18 +14,18 @@ import com.tamara.bankappli.model.Customer;
 @Table(name = "ACCOUNT")
 public class Account {
 	
-	  enum AccountType {
-		    CHEQUING,
-		    SAVING,
-		    RRSP
-		  }
+	enum AccountType {
+		CHEQUING,
+		SAVING,
+		RRSP
+	}
 	  
-	  enum Currency {
-		    AMERICAN_DOLLAR,
-		    CANADIAN_DOLLAR,
-		    EURO,
-		    JAPANESE_YEN;
-		  }
+	enum Currency {
+		AMERICAN_DOLLAR,
+		CANADIAN_DOLLAR,
+		EURO,
+		JAPANESE_YEN;
+	}
 		 
 	@Id @GeneratedValue
 	@Column(name = "id")  
