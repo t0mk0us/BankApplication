@@ -40,9 +40,9 @@ public class AddressController {
 	AddressService addressService;	
 
     @SuppressWarnings("unchecked")
-	//@Public
+
     @GetMapping("/list")
-    // @formatter:off
+
     @ApiResponses({
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
@@ -51,5 +51,4 @@ public class AddressController {
     	log.info("Lister les adresses de " + nomTableLookup);
     	return new ResponseEntity<List<Address>>(addressService.getAll(), HttpStatusCode.valueOf(200));
     }
-
 }

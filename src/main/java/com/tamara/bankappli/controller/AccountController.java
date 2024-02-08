@@ -38,10 +38,10 @@ public class AccountController<AccountService> {
 	AccountService accountService;
 
     @SuppressWarnings("unchecked")
-	//@Public
+
     @GetMapping("/list")
     @ApiOperation(value = "Lister les comptes")
-    // @formatter:off
+
     @ApiResponses({
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
