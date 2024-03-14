@@ -2,6 +2,10 @@ package com.tamara.bankappli.model;
 
 import java.util.Date;
 //import com.tamara.bankappli.model.Address;
+import java.util.List;
+
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,15 +17,14 @@ import jakarta.persistence.Table;
 @Table(name = "CUSTOMER")
 public class Customer {
 	
-	enum customerType {
-		PERSON,
-		ENTERPRISE
-	}
+	/*
+	 * enum customerType { PERSON, ENTERPRISE }
+	 */
 		  
 	@Id @GeneratedValue
 	@Column(name = "id")  
 	private String ID;
-	  
+	
 	@Column(name = "first_name")  
 	private String firstName;
 	
@@ -36,6 +39,10 @@ public class Customer {
 	
 	@Column(name = "date_of_birth")
 	private Date DOB;
+	
+	@JdbcTypeCode(SqlTypes.JSON)
+    @Column(columnDefinition="JSON")
+	private List<Account> accounts; 
 		
 	public String getFirstName() {
 		return firstName;
@@ -67,4 +74,8 @@ public class Customer {
 	public void setDOB(Date dOB) {
 		DOB = dOB;
 	}
+	/*
+	 * public List<Account> getAccounts() { return accounts; } public void
+	 * setAccounts(List<Account> accounts) { this.accounts = accounts; }
+	 */
 }

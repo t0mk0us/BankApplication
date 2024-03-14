@@ -13,5 +13,5 @@ import com.tamara.bankappli.model.Account;
 public interface AccountRepository
         extends JpaRepository<Account, String>, JpaSpecificationExecutor<Account> {
 	
-	
+		public Account findByFirstAndLastName();
 }

@@ -17,7 +17,8 @@ public class Account {
 	enum AccountType {
 		CHEQUING,
 		SAVING,
-		RRSP
+		RRSP,
+		MORTGAGE
 	}
 	  
 	enum Currency {
