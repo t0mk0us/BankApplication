@@ -1,7 +1,5 @@
 package com.tamara.bankappli.model;
 
-import java.math.BigInteger;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,7 +12,7 @@ public class Address {
 
 	@Id @GeneratedValue
 	@Column(name = "id")
-	private long ID;
+	private Long ID;
 	
 	@Column(name = "number")
 	private String number;
@@ -37,10 +35,10 @@ public class Address {
 	@Column(name = "postal_Code")
 	private String postalCode;
 	
-	public long getID() {
+	public Long getID() {
 		return ID;
 	}
-	public void setID(long iD) {
+	public void setID(Long iD) {
 		ID = iD;
 	}
 	public String getNumber() {

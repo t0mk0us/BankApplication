@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,36 +18,42 @@ import com.tamara.bankappli.model.Account;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Component
 @Slf4j
 public class AccountService {
 
 	@Autowired
 	AccountRepository accountRepo;
 
-	public List<Account> getAll() {
+	public List<Account> getAll(){
 		
 		log.info("Listing Accounts");
 		
 		return accountRepo.findAll();
 	}
 	
-	@SuppressWarnings("deprecation")
-	public Account getByID(String id)
-	{		
+	public Account getByID(Long id) {
+		
 		return accountRepo.getReferenceById(id);	
 	}
 	
-	@SuppressWarnings("deprecation")
-	public Account saveAccount(Account a)
-	{
-		return accountRepo.save(a);	
+	public List<Account> findByCustomerId(Long id) {
+		
+		return accountRepo.findByCustomer(id);	
+	}
+
+	public String saveAccount(Account a) {
+		
+		Long newAccId = accountRepo.save(a).getID();
+		
+		return "New account was successfully saved with ID = " + newAccId;	
 	}
 	
-	public void deleteAccount(Account a) {
+	public String deleteAccount(Account a) {
 		
 		accountRepo.delete(a);
 		
-		return;
+		return "Account with ID was successfully deleted = " + a.getID();
 	}
 	
 	public long countAccounts() {

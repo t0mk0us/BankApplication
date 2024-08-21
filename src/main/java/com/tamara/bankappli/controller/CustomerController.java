@@ -14,9 +14,8 @@ import org.springframework.http.HttpStatusCode;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.tamara.bankappli.enums.SwaggerConstant;
-import com.tamara.bankappli.model.Address;
-import com.tamara.bankappli.service.AddressService;
-
+import com.tamara.bankappli.model.Customer;
+import com.tamara.bankappli.service.CustomerService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
@@ -24,17 +23,17 @@ import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping(value = AddressController.CONTEXT_V1_ADDRESS)
+@RequestMapping(value = CustomerController.CONTEXT_V1_CUSTOMER)
 //@Api(tags = { SwaggerConstant.TAG_ADDRESS_NAME })
 @Slf4j
-public class AddressController {
+public class CustomerController {
 	
 	public static final String CONTEXT_1 = "http://design4logic/apps/bankapplication"; 
 	
-	public static final String CONTEXT_V1_ADDRESS = CONTEXT_1 + "address";
+	public static final String CONTEXT_V1_CUSTOMER = CONTEXT_1 + "customer";
 
 	@Autowired
-	AddressService addressService;
+	CustomerService customerService;
 
     @GetMapping("/list")
 
@@ -42,8 +41,9 @@ public class AddressController {
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<List<Address>> AccountLookUp(@ApiParam(name = "table", value = "nomTableLookup") @RequestParam(required = true) String nomTableLookup) throws JsonProcessingException {
+    public ResponseEntity<List<Customer>> CustomerLookUp(@ApiParam(name = "table", value = "nomTableLookup") @RequestParam(required = true) String nomTableLookup) throws JsonProcessingException {
     	log.info("Lister les adresses de " + nomTableLookup);
-    	return new ResponseEntity<List<Address>>(addressService.getAll(), HttpStatusCode.valueOf(200));
+    	return new ResponseEntity<List<Customer>>(customerService.getAll(), HttpStatusCode.valueOf(200));
     }
 }
+

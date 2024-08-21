@@ -38,7 +38,7 @@ public class BankApplication {
 	 * primaryDataSource() { return
 	 * firstDataSourceProperties().initializeDataSourceBuilder().build(); }
 	 */
-	
+	  	 
 	@Bean
 	public IntegrationDataSourceScriptDatabaseInitializer customIntegrationDataSourceInitializer(DataSource dataSource) {
 	    return new IntegrationDataSourceScriptDatabaseInitializer(dataSource, new DatabaseInitializationSettings());

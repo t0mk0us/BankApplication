@@ -11,71 +11,39 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "CUSTOMER")
 public class Customer {
 	
-	/*
-	 * enum customerType { PERSON, ENTERPRISE }
-	 */
+	enum CustomerType { PERSON, ENTERPRISE } 
 		  
 	@Id @GeneratedValue
 	@Column(name = "id")  
-	private String ID;
+	private Long ID;
 	
-	@Column(name = "first_name")  
-	private String firstName;
+	@Column(name = "customer_type")  
+	private CustomerType customer_type;
 	
-	@Column(name = "last_name")
-	private String lastName;
-	
-	@Column(name = "place_of_work")
-	private String placeOfWork;
-	
-	@Column(name = "address")
-	private Address address;
-	
-	@Column(name = "date_of_birth")
-	private Date DOB;
-	
-	@JdbcTypeCode(SqlTypes.JSON)
-    @Column(columnDefinition="JSON")
-	private List<Account> accounts; 
+	public Long getID() {
 		
-	public String getFirstName() {
-		return firstName;
+		return ID;
 	}
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+
+	public void setID(Long iD) {
+		
+		ID = iD;
 	}
-	public String getLastName() {
-		return lastName;
+
+	public CustomerType getCustomer_type() {
+		return customer_type;
 	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+
+	public void setCustomer_type(CustomerType customer_type) {
+		this.customer_type = customer_type;
 	}
-	public String getPlaceOfWork() {
-		return placeOfWork;
-	}
-	public void setPlaceOfWork(String placeOfWork) {
-		this.placeOfWork = placeOfWork;
-	}
-	public Address getAddress() {
-		return address;
-	}
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-	public Date getDOB() {
-		return DOB;
-	}
-	public void setDOB(Date dOB) {
-		DOB = dOB;
-	}
-	/*
-	 * public List<Account> getAccounts() { return accounts; } public void
-	 * setAccounts(List<Account> accounts) { this.accounts = accounts; }
-	 */
 }
