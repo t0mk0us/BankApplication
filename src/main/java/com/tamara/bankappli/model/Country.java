@@ -1,5 +1,8 @@
 package com.tamara.bankappli.model;
 
+import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.tamara.bankappli.enums.Continent;
 import com.tamara.bankappli.enums.Currency;
 
@@ -13,9 +16,11 @@ import jakarta.persistence.Table;
 @Table(name = "COUNTRY")
 public class Country {
 	
-	@Id @GeneratedValue
-	@Column(name = "id")  
-	private Long ID;
+	@Id
+	@Type(name = "org.hibernate.type.TextType", value = String.class)
+	@GeneratedValue
+	@Column(name = "id")
+	private UUID ID;
 
 	@Column(name = "symbol")  
 	private String symbol;
@@ -29,11 +34,11 @@ public class Country {
 	@Column(name = "continent")
 	private Continent continent;
 
-	public Long getID() {
+	public UUID getID() {
 		return ID;
 	}
 
-	public void setID(Long iD) {
+	public void setID(UUID iD) {
 		
 		ID = iD;
 	}

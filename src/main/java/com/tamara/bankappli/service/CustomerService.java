@@ -32,7 +32,7 @@ public class CustomerService {
 		return customerRepo.findAll();
 	}
 	
-	public Customer getByID(Long id) {	
+	public Customer getByID(UUID id) {	
 		
 		return customerRepo.getReferenceById(id);	
 	}

@@ -2,6 +2,7 @@ package com.tamara.bankappli.model;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import com.tamara.bankappli.enums.Gender;
 
@@ -45,12 +46,12 @@ public class Person extends Customer{
 	@JoinColumn(name = "account")
 	private List<Account> accounts;
 
-	public Long getID() {
+	public UUID getID() {
 		
 		return super.getID();
 	}
 
-	public void setID(Long iD) {
+	public void setID(UUID iD) {
 		
 		super.setID(iD);
 	}

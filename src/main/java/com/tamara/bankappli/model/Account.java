@@ -1,6 +1,7 @@
 package com.tamara.bankappli.model;
 
 import java.util.Objects;
+import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,6 +12,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.tamara.bankappli.enums.AccountStatus;
 import com.tamara.bankappli.enums.AccountType;
 import com.tamara.bankappli.enums.Currency;
@@ -20,9 +22,11 @@ import com.tamara.bankappli.model.Customer;
 @Table(name = "ACCOUNT")
 public class Account {
 		 
-	@Id @GeneratedValue
-	@Column(name = "id")  
-	private Long ID;
+	@Id
+	@Type(name = "org.hibernate.type.TextType", value = String.class)
+	@GeneratedValue
+	@Column(name = "id")
+	private UUID ID;
 
 	@OneToOne
     @JoinColumn(name = "owner")
@@ -55,12 +59,12 @@ public class Account {
 	@Column(name = "debit_interest")
 	private Float debit_interest;
 	
-	public Long getID() {
+	public UUID getID() {
 		
 		return ID;
 	}
 	
-	public void setID(Long iD) {
+	public void setID(UUID iD) {
 		
 		ID = iD;
 	}

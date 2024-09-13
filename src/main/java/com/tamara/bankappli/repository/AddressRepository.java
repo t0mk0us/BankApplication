@@ -1,6 +1,7 @@
 package com.tamara.bankappli.repository;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,8 +14,8 @@ import com.tamara.bankappli.model.Address;
 
 @Repository
 public interface AddressRepository
-        extends JpaRepository<Address, Long>, JpaSpecificationExecutor<Address> {
+        extends JpaRepository<Address, UUID>, JpaSpecificationExecutor<Address> {
 
-	List<Address> findByCustomer(Long id);
+	List<Address> findByCustomer(UUID id);
 		
 }

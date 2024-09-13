@@ -3,9 +3,12 @@ package com.tamara.bankappli.model;
 import java.util.Date;
 //import com.tamara.bankappli.model.Address;
 import java.util.List;
+import java.util.UUID;
 
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
+
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,19 +25,21 @@ public class Customer {
 	
 	enum CustomerType { PERSON, ENTERPRISE } 
 		  
-	@Id @GeneratedValue
-	@Column(name = "id")  
-	private Long ID;
+	@Id
+	@Type(name = "org.hibernate.type.TextType", value = String.class)
+	@GeneratedValue
+	@Column(name = "id")
+	private UUID ID;
 	
 	@Column(name = "customer_type")  
 	private CustomerType customer_type;
 	
-	public Long getID() {
+	public UUID getID() {
 		
 		return ID;
 	}
 
-	public void setID(Long iD) {
+	public void setID(UUID iD) {
 		
 		ID = iD;
 	}

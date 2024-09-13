@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
@@ -34,7 +35,7 @@ public class AddressService {
 		return addressRepo.findAll();
 	}
 	
-	public Address getByID(Long id) {
+	public Address getByID(UUID id) {
 		
 		return addressRepo.getReferenceById(id);	
 	}

@@ -1,5 +1,8 @@
 package com.tamara.bankappli.model;
 
+import java.util.UUID;
+
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.tamara.bankappli.enums.CompanyType;
 import com.tamara.bankappli.enums.Industry;
 
@@ -13,9 +16,11 @@ import jakarta.persistence.Table;
 @Table(name = "COMPANY")
 public class Company extends Customer{
 	  
-	@Id @GeneratedValue
-	@Column(name = "id")  
-	private Long ID;
+	@Id
+	@Type(name = "org.hibernate.type.TextType", value = String.class)
+	@GeneratedValue
+	@Column(name = "id")
+	private UUID ID;
 		
 	@Column(name = "company_name")  
 	private String companyName;
@@ -32,11 +37,11 @@ public class Company extends Customer{
 	@Column(name = "contact_phone")
 	private Phone contact_phone;
 
-	public Long getID() {
+	public UUID getID() {
 		return ID;
 	}
 
-	public void setID(Long iD) {
+	public void setID(UUID iD) {
 		ID = iD;
 	}
 

@@ -1,8 +1,16 @@
 package com.tamara.bankappli.model;
 
+import java.util.UUID;
+
+import java.lang.annotation.Annotation;
+import org.hibernate.id.factory.internal.UUIDGenerationTypeStrategy;
+
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -10,9 +18,12 @@ import jakarta.persistence.Table;
 @Table(name = "ADDRESS")
 public class Address {
 
-	@Id @GeneratedValue
+
+	@Id
+	@Type(name = "org.hibernate.type.TextType", value = String.class)
+	@GeneratedValue
 	@Column(name = "id")
-	private Long ID;
+	private UUID ID;
 	
 	@Column(name = "number")
 	private String number;
@@ -35,10 +46,10 @@ public class Address {
 	@Column(name = "postal_Code")
 	private String postalCode;
 	
-	public Long getID() {
+	public UUID getID() {
 		return ID;
 	}
-	public void setID(Long iD) {
+	public void setID(UUID iD) {
 		ID = iD;
 	}
 	public String getNumber() {

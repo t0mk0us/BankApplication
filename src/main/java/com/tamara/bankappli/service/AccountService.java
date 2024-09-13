@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
@@ -44,7 +45,7 @@ public class AccountService {
 
 	public String saveAccount(Account a) {
 		
-		Long newAccId = accountRepo.save(a).getID();
+		UUID newAccId = accountRepo.save(a).getID();
 		
 		return "New account was successfully saved with ID = " + newAccId;	
 	}
