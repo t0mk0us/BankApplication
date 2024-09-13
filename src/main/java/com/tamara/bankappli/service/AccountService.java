@@ -33,12 +33,12 @@ public class AccountService {
 		return accountRepo.findAll();
 	}
 	
-	public Account getByID(Long id) {
+	public Account getByID(UUID id) {
 		
 		return accountRepo.getReferenceById(id);	
 	}
 	
-	public List<Account> findByCustomerId(Long id) {
+	public List<Account> findByCustomerId(UUID id) {
 		
 		return accountRepo.findByCustomer(id);	
 	}

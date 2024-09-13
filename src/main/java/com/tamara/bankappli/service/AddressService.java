@@ -40,7 +40,7 @@ public class AddressService {
 		return addressRepo.getReferenceById(id);	
 	}
 	
-	public List<Address> findByCustomerId(Long id) {
+	public List<Address> findByCustomerId(UUID id) {
 		
 		return addressRepo.findByCustomer(id);	
 	}

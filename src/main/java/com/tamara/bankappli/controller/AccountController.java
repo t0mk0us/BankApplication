@@ -1,6 +1,7 @@
 package com.tamara.bankappli.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -65,9 +66,9 @@ public class AccountController{
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<Account> AccountByID(@ApiParam(value = "ID") @RequestParam(required = true) Long id) throws JsonProcessingException {
+    public ResponseEntity<Account> AccountByID(@ApiParam(value = "ID") @RequestParam(required = true) UUID id) throws JsonProcessingException {
     	log.info("Trouver un compte par ID " + "ID");
-    	return new ResponseEntity<Account>(((com.tamara.bankappli.service.AccountService) accountService).getByID(id), HttpStatus.OK);
+    	return new ResponseEntity<Account>(((AccountService) accountService).getByID(id), HttpStatus.OK);
     }
     
     @GetMapping("/findByCustomer")
@@ -76,7 +77,7 @@ public class AccountController{
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<List<Account>> AccountByCustomerId(@ApiParam(value = "ID") @RequestParam(required = true) Long id) throws JsonProcessingException {
+    public ResponseEntity<List<Account>> AccountByCustomerId(@ApiParam(value = "ID") @RequestParam(required = true) UUID id) throws JsonProcessingException {
     	log.info("Trouver un compte par ID du client  " + "ID");
     	return new ResponseEntity<List<Account>>(((com.tamara.bankappli.service.AccountService) accountService).findByCustomerId(id), HttpStatus.OK);
     }
