@@ -1,9 +1,6 @@
 # syntax=docker/dockerfile:1
 
-FROM node:18-alpine
-WORKDIR /app
-COPY . .
-RUN yarn install --production
-CMD ["node", "src/index.js"]
-ENTRYPOINT ["javascript", "app.js"]
-EXPOSE 3000
+FROM openjdk:17-jdk-alpine
+MAINTAINER baeldung.com
+COPY target/BankApplication-0.0.1-SNAPSHOT.jar app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]
