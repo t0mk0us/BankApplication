@@ -4,15 +4,18 @@ import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.tamara.bankappli.model.Account;
 import com.tamara.bankappli.model.Customer;
+import com.tamara.bankappli.model.Person;
 
+@Component
 @Repository
-public interface CustomerRepository 
-	extends JpaRepository<Customer, UUID>, JpaSpecificationExecutor<Customer>{
+public interface PersonRepository 
+	extends JpaRepository<Person, UUID>, JpaSpecificationExecutor<Person>{
 	
-		public Customer findByFirstNameAndLastName(String firstName, String lastName);
+		public Person findByFirstNameAndLastName(String firstName, String lastName);
 
 }

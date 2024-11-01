@@ -13,45 +13,46 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.tamara.bankappli.repository.CustomerRepository;
+import com.tamara.bankappli.repository.PersonRepository;
 import com.tamara.bankappli.model.Customer;
+import com.tamara.bankappli.model.Person;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Component
 @Slf4j
-public class CustomerService {
+public class PersonService {
 
 	@Autowired
-	CustomerRepository customerRepo;
+	PersonRepository personRepo;
 
-	public List<Customer> getAll() {
+	public List<Person> getAll() {
 		
 		log.info("Listing Customers");
 		
-		return customerRepo.findAll();
+		return personRepo.findAll();
 	}
 	
-	public Customer getByID(UUID id) {	
+	public Person getByID(UUID id) {	
 		
-		return customerRepo.getReferenceById(id);	
+		return personRepo.getReferenceById(id);	
 	}
 	
-	public Customer saveCustomer(Customer c) {
+	public Person saveCustomer(Person p) {
 		
-		return customerRepo.save(c);
+		return personRepo.save(p);
 	}
 	
-	public void deletecustomerRepo(Customer c) {
+	public void deletePerson(Person p) {
 		
-		customerRepo.delete(c);
+		personRepo.delete(p);
 		
 		return;
 	}
 	
-	public long countCustomers() {
+	public long countPersons() {
 		
-		return customerRepo.count();
+		return personRepo.count();
 	}
 }

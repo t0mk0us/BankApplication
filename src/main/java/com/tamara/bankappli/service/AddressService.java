@@ -1,21 +1,13 @@
 package com.tamara.bankappli.service;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.tamara.bankappli.model.Account;
 import com.tamara.bankappli.model.Address;
-import com.tamara.bankappli.model.Address;
+import com.tamara.bankappli.model.Person;
 import com.tamara.bankappli.repository.AddressRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -40,9 +32,14 @@ public class AddressService {
 		return addressRepo.getReferenceById(id);	
 	}
 	
-	public List<Address> findByCustomerId(UUID id) {
+	public List<Address> findByPerson(Person p) {
 		
-		return addressRepo.findByCustomer(id);	
+		return findByPersonId(p.getID());
+	}
+	
+	private List<Address> findByPersonId(UUID id) {
+
+		return addressRepo.findByPersonID(id);
 	}
 	
 	public Address saveAddress(Address a) {

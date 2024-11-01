@@ -7,8 +7,10 @@ import java.util.UUID;
 
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
+import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.tamara.bankappli.enums.CustomerType;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,11 +21,10 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
+@Component
 @Entity
 @Table(name = "CUSTOMER")
 public class Customer {
-	
-	enum CustomerType { PERSON, ENTERPRISE } 
 		  
 	@Id
 	@Type(name = "org.hibernate.type.TextType", value = String.class)

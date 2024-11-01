@@ -79,7 +79,7 @@ public class AccountController{
     })
     public ResponseEntity<List<Account>> AccountByCustomerId(@ApiParam(value = "ID") @RequestParam(required = true) UUID id) throws JsonProcessingException {
     	log.info("Trouver un compte par ID du client  " + "ID");
-    	return new ResponseEntity<List<Account>>(((com.tamara.bankappli.service.AccountService) accountService).findByCustomerId(id), HttpStatus.OK);
+    	return new ResponseEntity<List<Account>>(((com.tamara.bankappli.service.AccountService) accountService).findByOwnerID(id), HttpStatus.OK);
     }
     
     @GetMapping("/save")

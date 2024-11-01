@@ -16,7 +16,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.http.HttpMethod;
-import de.codecentric.boot.admin.server.config.AdminServerProperties;
+//import de.codecentric.boot.admin.server.config.AdminServerProperties;
 
 @Configuration
 @EnableWebSecurity

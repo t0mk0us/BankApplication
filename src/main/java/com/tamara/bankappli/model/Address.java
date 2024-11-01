@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import java.lang.annotation.Annotation;
 import org.hibernate.id.factory.internal.UUIDGenerationTypeStrategy;
+import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
@@ -12,8 +13,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+@Component
 @Entity
 @Table(name = "ADDRESS")
 public class Address {
@@ -24,6 +28,10 @@ public class Address {
 	@GeneratedValue
 	@Column(name = "id")
 	private UUID ID;
+	
+	@ManyToOne
+    @JoinColumn(name = "owner")
+	private Person person;
 	
 	@Column(name = "number")
 	private String number;

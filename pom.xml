@@ -207,7 +207,7 @@
 			<version>1.5.0</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/de.codecentric/spring-boot-admin-server -->
-		<dependency>
+<!--		<dependency>
 		    <groupId>de.codecentric</groupId>
 		    <artifactId>spring-boot-admin-server</artifactId>
 		    <version>3.3.3</version>
@@ -221,7 +221,7 @@
 			<groupId>de.codecentric</groupId>
 			<artifactId>spring-boot-admin-server-ui-login</artifactId>
 			<version>1.5.7</version>
-		</dependency>
+		</dependency>-->
 <!--		<dependency>
 			<groupId>org.springframework.shell</groupId>
 			<artifactId>spring-shell-dependencies</artifactId>

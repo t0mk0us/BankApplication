@@ -1,95 +1,101 @@
 package com.tamara.bankappli.model;
 
+import java.io.Serializable;
+import java.util.UUID;
+
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+import org.springframework.stereotype.Component;
+
 import com.tamara.bankappli.enums.PhoneType;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
+@Component
 @Entity
 @Table(name = "PHONE")
-public class Phone {
+public class Phone  implements Serializable {
 		 
-	private PhoneType phoneType;
-	
-	@Id @GeneratedValue
+	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")  
-	private Long ID;
+	private UUID ID;
 	
-	@OneToOne
-    @JoinColumn(name = "country_code")
-	@Column(name = "country_code")
-	private short country_code;
+	//@ManyToOne
+    @Column(name = "country_code")
+	private Short country_code;
 	
 	@Column(name = "area_code")
-	private short area_code;
+	private Short area_code;
 	
 	@Column(name = "phone_number")
-	private int phone_number;
+	private Integer phone_number;
 	
-	@Column(name = "phone_type")
-	private PhoneType phone_type;
+	//@ManyToOne
+	/*
+	 * @Enumerated(EnumType.STRING)
+	 * 
+	 * @JdbcTypeCode(SqlTypes.JSON)
+	 * 
+	 * @JoinColumn(name = "phone_type")
+	 */
+	//private PhoneType phone_type;
 		
-	public Long getID() {
+	public UUID getID() {
 		
 		return ID;
 	}
 	
-	public void setID(Long iD) {
+	public void setID(UUID iD) {
 		
 		ID = iD;
 	}
 
-	public PhoneType getPhoneType() {
-		return phoneType;
-	}
+	/*
+	 * public PhoneType getPhoneType() { return phone_type; }
+	 * 
+	 * public void setPhoneType(PhoneType phoneType) { this.phone_type = phoneType;
+	 * }
+	 */
 
-	public void setPhoneType(PhoneType phoneType) {
-		this.phoneType = phoneType;
-	}
-
-	public short getCountry_code() {
+	public Short getCountry_code() {
 		
 		return country_code;
 	}
 
-	public void setCountry_code(short country_code) {
+	public void setCountry_code(Short country_code) {
 		
 		this.country_code = country_code;
 	}
 
-	public short getArea_code() {
+	public Short getArea_code() {
 		
 		return area_code;
 	}
 
-	public void setArea_code(short area_code) {
+	public void setArea_code(Short area_code) {
 		
 		this.area_code = area_code;
 	}
 
-	public int getPhone_number() {
+	public Integer getPhone_number() {
 		
 		return phone_number;
 	}
 
-	public void setPhone_number(int phone_number) {
+	public void setPhone_number(Integer phone_number) {
 	
 		this.phone_number = phone_number;
-	}
-
-	public PhoneType getPhone_type() {
-		
-		return phone_type;
-	}
-
-	public void setPhone_type(PhoneType phone_type) {
-	
-		this.phone_type = phone_type;
 	}
 }

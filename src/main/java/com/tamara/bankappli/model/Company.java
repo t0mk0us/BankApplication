@@ -2,6 +2,8 @@ package com.tamara.bankappli.model;
 
 import java.util.UUID;
 
+import org.springframework.stereotype.Component;
+
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.tamara.bankappli.enums.CompanyType;
 import com.tamara.bankappli.enums.Industry;
@@ -12,9 +14,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+@Component
 @Entity
 @Table(name = "COMPANY")
-public class Company extends Customer{
+public class Company {
 	  
 	@Id
 	@Type(name = "org.hibernate.type.TextType", value = String.class)

@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.tamara.bankappli.enums.Gender;
 
 import jakarta.persistence.Column;
@@ -15,45 +18,59 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
+@Component
 @Entity
 @Table(name = "PERSON")
-public class Person extends Customer{
+public class Person {
+	
+	@Id
+	@Type(name = "org.hibernate.type.TextType", value = String.class)
+	@GeneratedValue
+	@Column(name = "id")
+	private UUID ID;
 		
 	@Column(name = "first_name")  
 	private String firstName;
 		
 	@Column(name = "last_name")
 	private String lastName;
-		
+	
 	@Column(name = "gender")
 	private Gender gender;
-		
-	@Column(name = "place_of_work")
-	private String placeOfWork;
+	
+	@OneToOne
+	@JoinColumn(name = "place_of_work")
+	private Company placeOfWork;
 		
 	@OneToOne
-	@JoinColumn(name = "address")
+	@JoinColumn(name = "address_id")
 	private Address address;
 		
 	@OneToMany
 	@JoinColumn(name = "phone_id")
 	private List<Phone> phones;
 		
-	@Column(name = "date_of_birth")
+	@Column(name = "dob")
 	private Date DOB;
 		
 	@OneToMany
-	@JoinColumn(name = "account")
+	@JoinColumn(name = "account_id")
 	private List<Account> accounts;
+	
+	@Column(name = "is_customer")
+	private boolean isCustomer;
+	
+	@Column(name = "is_employee")
+	private boolean isEmployee;
 
 	public UUID getID() {
 		
-		return super.getID();
+		return ID;
 	}
 
 	public void setID(UUID iD) {
 		
-		super.setID(iD);
+		ID = iD;
 	}
 
 	public String getFirstName() {
@@ -86,12 +103,12 @@ public class Person extends Customer{
 		this.gender = gender;
 	}
 
-	public String getPlaceOfWork() {
+	public Company getPlaceOfWork() {
 		
 		return placeOfWork;
 	}
 
-	public void setPlaceOfWork(String placeOfWork) {
+	public void setPlaceOfWork(Company placeOfWork) {
 		
 		this.placeOfWork = placeOfWork;
 	}
@@ -134,5 +151,13 @@ public class Person extends Customer{
 	public void setAccounts(List<Account> accounts) {
 		
 		this.accounts = accounts;
+	}
+
+	public boolean isCustomer() {
+		return isCustomer;
+	}
+
+	public void setCustomer(boolean isCustomer) {
+		this.isCustomer = isCustomer;
 	} 
 }

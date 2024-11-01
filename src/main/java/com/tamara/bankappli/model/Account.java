@@ -3,11 +3,14 @@ package com.tamara.bankappli.model;
 import java.util.Objects;
 import java.util.UUID;
 
+import org.springframework.stereotype.Component;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -15,10 +18,10 @@ import jakarta.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.tamara.bankappli.enums.AccountStatus;
 import com.tamara.bankappli.enums.AccountType;
-import com.tamara.bankappli.enums.Currency;
 import com.tamara.bankappli.model.Customer;
 
 @Entity
+@Component
 @Table(name = "ACCOUNT")
 public class Account {
 		 
@@ -28,11 +31,14 @@ public class Account {
 	@Column(name = "id")
 	private UUID ID;
 
-	@OneToOne
+	private UUID customerId;
+	
+	@ManyToOne
     @JoinColumn(name = "owner")
 	private Customer owner;
 	
-	@Column(name = "currency")
+	@OneToOne
+	@JoinColumn(name = "currency_id")
 	private Currency currency;
 	
 	@Column(name = "balance")
@@ -69,11 +75,11 @@ public class Account {
 		ID = iD;
 	}
 
-	public int getCurrencyId() {
+	public UUID getCurrencyId() {
 	
-		return this.currency.ordinal();
+		return this.currency.getID();
 	}
-		
+
 	public int getAccountTypeId() {
 	
 		return this.type.ordinal();
@@ -164,8 +170,14 @@ public class Account {
 	public void setDebit_interest(Float debit_interest) {
 		this.debit_interest = debit_interest;
 	}
-	
-	
+
+	public UUID getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(UUID customerId) {
+		this.customerId = customerId;
+	}
 
 	@Override
 	public String toString() {

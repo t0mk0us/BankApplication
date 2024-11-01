@@ -1,17 +1,25 @@
 package com.tamara.bankappli.model;
 
+import java.util.List;
 import java.util.UUID;
+
+import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.tamara.bankappli.enums.Continent;
-import com.tamara.bankappli.enums.Currency;
 
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+@Component
 @Entity
 @Table(name = "COUNTRY")
 public class Country {
@@ -28,11 +36,19 @@ public class Country {
 	@Column(name = "name")  
 	private String name;
 	
-	@Column(name = "currency")
-	private Currency currency;
+	@ManyToMany
+	@ElementCollection
+	@CollectionTable(name = "CURRENCY", joinColumns = @JoinColumn(name = "currency_id"))
+	private List<Currency> currencies;
+	
+	@Column(name = "continent_id")
+	private UUID continentId;
 	
 	@Column(name = "continent")
 	private Continent continent;
+	
+	@Column(name = "country_code")
+	private Short country_code;
 
 	public UUID getID() {
 		return ID;
@@ -73,11 +89,11 @@ public class Country {
 		this.continent = continent;
 	}
 
-	public Currency getCurrency() {
-		return currency;
+	public List<Currency> getCurrencies() {
+		return currencies;
 	}
 
-	public void setCurrency(Currency currency) {
-		this.currency = currency;
+	public void setCurrencies(List<Currency> currencies) {
+		this.currencies = currencies;
 	}
 }
