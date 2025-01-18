@@ -29,7 +29,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class AddressController {
 	
-	public static final String CONTEXT_1 = "http://design4logic/apps/bankapplication"; 
+	//public static final String CONTEXT_1 = "http://design4logic/apps/bankapplication"; 
+	public static final String CONTEXT_1 = "http:/localhost:8080/bankapplication/"; 
 	
 	public static final String CONTEXT_V1_ADDRESS = CONTEXT_1 + "address";
 

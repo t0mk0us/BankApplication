@@ -33,7 +33,7 @@ public class CurrencyService {
 		return currencyRepo.findAll();
 	}
 	
-	public Currency getByID(UUID id) {	
+	public Currency getByID(Long id) {	
 		
 		return currencyRepo.getReferenceById(id);	
 	}

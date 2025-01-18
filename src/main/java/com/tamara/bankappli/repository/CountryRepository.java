@@ -14,7 +14,7 @@ import com.tamara.bankappli.model.Currency;
 @Component
 @Repository
 public interface CountryRepository 
-	extends JpaRepository<Country, UUID>, JpaSpecificationExecutor<Country>{
+	extends JpaRepository<Country, Long>, JpaSpecificationExecutor<Country>{
 	
 	public Country findByName(String name);
 	

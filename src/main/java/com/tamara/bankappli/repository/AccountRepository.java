@@ -2,7 +2,6 @@ package com.tamara.bankappli.repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -19,10 +18,10 @@ import jakarta.persistence.EntityManager;
 
 @Repository
 public interface AccountRepository
-        extends JpaRepository<Account, UUID>, JpaSpecificationExecutor<Account> {
+        extends JpaRepository<Account, Long>, JpaSpecificationExecutor<Account> {
 	
 	public List<Account> findByOwner(Customer owner);
 	
-	public List<Account> findByOwnerID(UUID id);
+	public List<Account> findByOwnerID(Long id);
 	
 }

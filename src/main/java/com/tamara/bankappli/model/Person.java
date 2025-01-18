@@ -27,7 +27,7 @@ public class Person {
 	@Type(name = "org.hibernate.type.TextType", value = String.class)
 	@GeneratedValue
 	@Column(name = "id")
-	private UUID ID;
+	private Long ID;
 		
 	@Column(name = "first_name")  
 	private String firstName;
@@ -63,12 +63,12 @@ public class Person {
 	@Column(name = "is_employee")
 	private boolean isEmployee;
 
-	public UUID getID() {
+	public Long getID() {
 		
 		return ID;
 	}
 
-	public void setID(UUID iD) {
+	public void setID(Long iD) {
 		
 		ID = iD;
 	}

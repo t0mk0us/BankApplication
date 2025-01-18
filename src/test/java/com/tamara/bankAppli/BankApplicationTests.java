@@ -1,4 +1,4 @@
-package com.bankAppli;
+package com.tamara.bankAppli;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

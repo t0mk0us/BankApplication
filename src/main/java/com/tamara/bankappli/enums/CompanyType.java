@@ -2,6 +2,9 @@ package com.tamara.bankappli.enums;
 
 public enum CompanyType {
 	
-	PRIVATE,
-    PUBLIC;
+	PUBLIC,
+    PRIVATE,
+	COMMUNITY,
+	NON_PROFIT,
+	FREELANCE;
 }

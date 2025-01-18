@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -29,11 +31,9 @@ public class Account {
 	@Type(name = "org.hibernate.type.TextType", value = String.class)
 	@GeneratedValue
 	@Column(name = "id")
-	private UUID ID;
-
-	private UUID customerId;
+	private Long ID;
 	
-	@ManyToOne
+	@OneToOne
     @JoinColumn(name = "owner")
 	private Customer owner;
 	
@@ -44,45 +44,40 @@ public class Account {
 	@Column(name = "balance")
 	private Float balance;
 	
+	@Enumerated(EnumType.STRING)
 	@Column(name = "account_type")
 	private AccountType type;
 	
-	@Column(name = "status")
-	private AccountStatus status;
+	@Column(name = "management_fee")
+	private Float fees;
 	
-	@Column(name = "debit_limit")
-	private Float debitLimit;
+	/*
+	 * @Column(name = "status") private AccountStatus status;
+	 * 
+	 * @Column(name = "debit_limit") private Float debitLimit;
+	 * 
+	 * @Column(name = "monthly_payment") private Float monthly_payment;
+	 * 
+	 * @Column(name = "missed_payments") private int missedPayments;
+	 * 
+	 * @Column(name = "credit_interest") private Float credit_interest;
+	 * 
+	 * @Column(name = "debit_interest") private Float debit_interest;
+	 */
 	
-	@Column(name = "monthly_payment")
-	private Float monthly_payment;
-	
-	@Column(name = "missed_payments")
-	private int missedPayments;
-	
-	@Column(name = "credit_interest")
-	private Float credit_interest;
-	
-	@Column(name = "debit_interest")
-	private Float debit_interest;
-	
-	public UUID getID() {
+	public Long getID() {
 		
 		return ID;
 	}
 	
-	public void setID(UUID iD) {
+	public void setID(Long iD) {
 		
 		ID = iD;
 	}
 
-	public UUID getCurrencyId() {
+	public Long getCurrencyId() {
 	
 		return this.currency.getID();
-	}
-
-	public int getAccountTypeId() {
-	
-		return this.type.ordinal();
 	}
 	
 	public AccountType getType() {
@@ -90,42 +85,32 @@ public class Account {
 		return type;
 	}
 	
-	public AccountStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(AccountStatus status) {
-		this.status = status;
-	}
-
 	public void setType(AccountType type) {
-	
+		
 		this.type = type;
 	}
+	
+	/*
+	 * public AccountStatus getStatus() { return status; }
+	 * 
+	 * public void setStatus(AccountStatus status) { this.status = status; }
+	 */
 
-	public Float getDebitLimit() {
-		return debitLimit;
-	}
-
-	public void setDebitLimit(Float debitLimit) {
-		this.debitLimit = debitLimit;
-	}
-
-	public Float getMonthly_payment() {
-		return monthly_payment;
-	}
-
-	public void setMonthly_payment(Float monthly_payment) {
-		this.monthly_payment = monthly_payment;
-	}
-
-	public int getMissedPayments() {
-		return missedPayments;
-	}
-
-	public void setMissedPayments(int missedPayments) {
-		this.missedPayments = missedPayments;
-	}
+	/*
+	 * public Float getDebitLimit() { return debitLimit; }
+	 * 
+	 * public void setDebitLimit(Float debitLimit) { this.debitLimit = debitLimit; }
+	 * 
+	 * public Float getMonthly_payment() { return monthly_payment; }
+	 * 
+	 * public void setMonthly_payment(Float monthly_payment) { this.monthly_payment
+	 * = monthly_payment; }
+	 * 
+	 * public int getMissedPayments() { return missedPayments; }
+	 * 
+	 * public void setMissedPayments(int missedPayments) { this.missedPayments =
+	 * missedPayments; }
+	 */
 
 	public Customer getOwner() { 
 	
@@ -155,40 +140,31 @@ public class Account {
 		this.balance = balance;
 	}
 
-	public Float getCredit_interest() {
-		return credit_interest;
+	/*
+	 * public Float getCredit_interest() { return credit_interest; }
+	 * 
+	 * public void setCredit_interest(Float credit_interest) { this.credit_interest
+	 * = credit_interest; }
+	 * 
+	 * public Float getDebit_interest() { return debit_interest; }
+	 * 
+	 * public void setDebit_interest(Float debit_interest) { this.debit_interest =
+	 * debit_interest; }
+	 */
+
+	public Float getFees() {
+		return fees;
 	}
 
-	public void setCredit_interest(Float credit_interest) {
-		this.credit_interest = credit_interest;
+	public void setFees(Float fees) {
+		this.fees = fees;
 	}
-
-	public Float getDebit_interest() {
-		return debit_interest;
-	}
-
-	public void setDebit_interest(Float debit_interest) {
-		this.debit_interest = debit_interest;
-	}
-
-	public UUID getCustomerId() {
-		return customerId;
-	}
-
-	public void setCustomerId(UUID customerId) {
-		this.customerId = customerId;
-	}
-
-	@Override
-	public String toString() {
-		return "Account [ID=" + ID + ", + type =" + type + ", currency="
-				+ currency + "]";
-		}
 
 	@Override
 	public int hashCode() {
 		return Objects.hash(ID, currency, type);
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -202,5 +178,10 @@ public class Account {
 				//&& Objects.equals(owner, other.owner)
 				&& Objects.equals(type, other.type);
 	}
-
+	
+	@Override
+	public String toString() {
+		return "Account [ID=" + ID + ", + type =" + type + ", currency="
+				+ currency + "]";
+		}
 }

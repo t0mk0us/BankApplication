@@ -10,41 +10,49 @@ import com.tamara.bankappli.enums.Industry;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Component
 @Entity
-@Table(name = "COMPANY")
+@Table(name = "COMPANY_1")
 public class Company {
 	  
 	@Id
 	@Type(name = "org.hibernate.type.TextType", value = String.class)
 	@GeneratedValue
 	@Column(name = "id")
-	private UUID ID;
+	private Long ID;
 		
 	@Column(name = "company_name")  
 	private String companyName;
-		
+	
+	@Enumerated(EnumType.STRING)	
 	@Column(name = "company_type")
 	private CompanyType company_type;	
 	
+	@Enumerated(EnumType.STRING)
 	@Column(name = "industry")
 	private  Industry industry;
-				
-	@Column(name = "contact_person")
-	private String contact_person;
-		
-	@Column(name = "contact_phone")
+	
+	@OneToOne
+	@JoinColumn(name = "contact_person")
+	private Person contact_person;
+	
+	@OneToOne
+	@JoinColumn(name = "contact_phone")
 	private Phone contact_phone;
 
-	public UUID getID() {
+	public Long getID() {
 		return ID;
 	}
 
-	public void setID(UUID iD) {
+	public void setID(Long iD) {
 		ID = iD;
 	}
 
@@ -63,10 +71,6 @@ public class Company {
 	public void setCompany_type(CompanyType company_type) {
 		this.company_type = company_type;
 	}
-	
-	public int getCompany_typeId() {
-		return company_type.ordinal();
-	}
 
 	public Industry getIndustry() {
 		return industry;
@@ -76,11 +80,11 @@ public class Company {
 		this.industry = industry;
 	}
 
-	public String getContact_person() {
+	public Person getContact_person() {
 		return contact_person;
 	}
 
-	public void setContact_person(String contact_person) {
+	public void setContact_person(Person contact_person) {
 		this.contact_person = contact_person;
 	}
 

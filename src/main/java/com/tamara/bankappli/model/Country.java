@@ -6,17 +6,18 @@ import java.util.UUID;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
-import com.tamara.bankappli.enums.Continent;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Component
@@ -25,10 +26,9 @@ import jakarta.persistence.Table;
 public class Country {
 	
 	@Id
-	@Type(name = "org.hibernate.type.TextType", value = String.class)
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "id")
-	private UUID ID;
+	private Long ID;
 
 	@Column(name = "symbol")  
 	private String symbol;
@@ -36,25 +36,27 @@ public class Country {
 	@Column(name = "name")  
 	private String name;
 	
-	@ManyToMany
-	@ElementCollection
-	@CollectionTable(name = "CURRENCY", joinColumns = @JoinColumn(name = "currency_id"))
-	private List<Currency> currencies;
+	//@ManyToMany
+	//@ElementCollection
+	//@CollectionTable(name = "CURRENCY", joinColumns = @JoinColumn(name = "currency_id"))
+	//private List<Currency> currencies;
 	
-	@Column(name = "continent_id")
-	private UUID continentId;
+	@OneToOne
+	@JoinColumn(name = "currency_id")
+	private Currency currency;
 	
-	@Column(name = "continent")
+	@OneToOne
+	@JoinColumn(name = "continent_id")
 	private Continent continent;
 	
-	@Column(name = "country_code")
-	private Short country_code;
+	@Column(name = "country_code_id")
+	private short country_code;
 
-	public UUID getID() {
+	public Long getID() {
 		return ID;
 	}
 
-	public void setID(UUID iD) {
+	public void setID(Long iD) {
 		
 		ID = iD;
 	}
@@ -89,11 +91,26 @@ public class Country {
 		this.continent = continent;
 	}
 
-	public List<Currency> getCurrencies() {
-		return currencies;
+	public Currency getCurrency() {
+		return currency;
 	}
 
-	public void setCurrencies(List<Currency> currencies) {
-		this.currencies = currencies;
+	public void setCurrency(Currency currency) {
+		this.currency = currency;
 	}
+
+	public short getCountry_code() {
+		return country_code;
+	}
+
+	public void setCountry_code(short country_code) {
+		this.country_code = country_code;
+	}
+
+	/*
+	 * public List<Currency> getCurrencies() { return currencies; }
+	 * 
+	 * public void setCurrencies(List<Currency> currencies) { this.currencies =
+	 * currencies; }
+	 */
 }

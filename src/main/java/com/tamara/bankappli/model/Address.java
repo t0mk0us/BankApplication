@@ -15,6 +15,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Component
@@ -24,14 +25,9 @@ public class Address {
 
 
 	@Id
-	@Type(name = "org.hibernate.type.TextType", value = String.class)
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "id")
-	private UUID ID;
-	
-	@ManyToOne
-    @JoinColumn(name = "owner")
-	private Person person;
+	private Long ID;
 	
 	@Column(name = "number")
 	private String number;
@@ -48,16 +44,17 @@ public class Address {
 	@Column(name = "state_province")
 	private String state_province;
 	
-	@Column(name = "country")
-	private String country;
+	@OneToOne
+	@JoinColumn(name = "country_id")
+	private Country countryId;
 	
 	@Column(name = "postal_Code")
 	private String postalCode;
 	
-	public UUID getID() {
+	public Long getID() {
 		return ID;
 	}
-	public void setID(UUID iD) {
+	public void setID(Long iD) {
 		ID = iD;
 	}
 	public String getNumber() {
@@ -90,11 +87,11 @@ public class Address {
 	public void setState_province(String state_province) {
 		this.state_province = state_province;
 	}
-	public String getCountry() {
-		return country;
+	public Country getCountry() {
+		return countryId;
 	}
-	public void setCountry(String country) {
-		this.country = country;
+	public void setCountry(Country country) {
+		this.countryId = country;
 	}
 	public String getPostalCode() {
 		return postalCode;

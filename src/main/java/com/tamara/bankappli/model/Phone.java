@@ -1,7 +1,6 @@
 package com.tamara.bankappli.model;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
@@ -30,17 +29,20 @@ public class Phone  implements Serializable {
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")  
-	private UUID ID;
+	private Long ID;
 	
 	//@ManyToOne
-    @Column(name = "country_code")
-	private Short country_code;
+    @Column(name = "country_code_id")
+	private Long country_code;
 	
-	@Column(name = "area_code")
-	private Short area_code;
+	@Column(name = "area_code_id")
+	private Long area_code;
 	
 	@Column(name = "phone_number")
 	private Integer phone_number;
+	
+	@Column(name = "phone_type")
+	private short phone_type;
 	
 	//@ManyToOne
 	/*
@@ -52,12 +54,12 @@ public class Phone  implements Serializable {
 	 */
 	//private PhoneType phone_type;
 		
-	public UUID getID() {
+	public Long getID() {
 		
 		return ID;
 	}
 	
-	public void setID(UUID iD) {
+	public void setID(Long iD) {
 		
 		ID = iD;
 	}
@@ -69,22 +71,22 @@ public class Phone  implements Serializable {
 	 * }
 	 */
 
-	public Short getCountry_code() {
+	public Long getCountry_code() {
 		
 		return country_code;
 	}
 
-	public void setCountry_code(Short country_code) {
+	public void setCountry_code(Long country_code) {
 		
 		this.country_code = country_code;
 	}
 
-	public Short getArea_code() {
+	public Long getArea_code() {
 		
 		return area_code;
 	}
 
-	public void setArea_code(Short area_code) {
+	public void setArea_code(Long area_code) {
 		
 		this.area_code = area_code;
 	}
@@ -98,4 +100,14 @@ public class Phone  implements Serializable {
 	
 		this.phone_number = phone_number;
 	}
+
+	public short getPhone_type() {
+		return phone_type;
+	}
+
+	public void setPhone_type(short phone_type) {
+		this.phone_type = phone_type;
+	}
+	
+	
 }

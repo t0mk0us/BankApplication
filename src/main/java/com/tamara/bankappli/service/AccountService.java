@@ -43,24 +43,24 @@ public class AccountService {
 		return accountRepo.findAll();
 	}
 	
-	public Account getByID(UUID id) {
+	public Account getByID(Long id) {
 		
 		return accountRepo.getReferenceById(id);	
 	}
 	
-	public List<Account> findByOwner(Customer c) {
-		
-		return findByOwnerID(c.getID());
-	}
-	
-	public List<Account> findByOwnerID(UUID id) {
-		
-		return accountRepo.findByOwnerID(id);	
-	}
+	/*
+	 * public List<Account> findByOwner(Long id) {
+	 * 
+	 * return findByOwnerID(id); }
+	 * 
+	 * public List<Account> findByOwnerID(Long id) {
+	 * 
+	 * return accountRepo.findByOwnerID(id); }
+	 */
 
 	public String saveAccount(Account a) {
 		
-		UUID newAccId = accountRepo.save(a).getID();
+		Long newAccId = accountRepo.save(a).getID();
 		
 		return "New account was successfully saved with ID = " + newAccId;	
 	}

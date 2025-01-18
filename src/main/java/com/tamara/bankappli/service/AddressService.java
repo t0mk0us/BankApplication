@@ -27,20 +27,20 @@ public class AddressService {
 		return addressRepo.findAll();
 	}
 	
-	public Address getByID(UUID id) {
+	public Address getByID(Long id) {
 		
 		return addressRepo.getReferenceById(id);	
 	}
 	
-	public List<Address> findByPerson(Person p) {
-		
-		return findByPersonId(p.getID());
-	}
-	
-	private List<Address> findByPersonId(UUID id) {
-
-		return addressRepo.findByPersonID(id);
-	}
+	/*
+	 * public List<Address> findByPerson(Person p) {
+	 * 
+	 * return findByPersonId(p.getID()); }
+	 * 
+	 * private List<Address> findByPersonId(Long long1) {
+	 * 
+	 * return addressRepo.findByPersonID(long1); }
+	 */
 	
 	public Address saveAddress(Address a) {
 		

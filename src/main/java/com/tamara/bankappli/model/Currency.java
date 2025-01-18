@@ -21,7 +21,7 @@ public class Currency {
 	@Type(name = "org.hibernate.type.TextType", value = String.class)
 	@GeneratedValue
 	@Column(name = "id")
-	private UUID ID;
+	private Long ID;
 	
 	@Column(name = "name")
 	private String name;
@@ -32,10 +32,10 @@ public class Currency {
 	@Column(name = "symbol")
 	private String symbol;
 	
-	public UUID getID() {
+	public Long getID() {
 		return ID;
 	}
-	public void setID(UUID iD) {
+	public void setID(Long iD) {
 		ID = iD;
 	}
 	public String getName() {

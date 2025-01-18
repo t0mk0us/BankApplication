@@ -17,10 +17,10 @@ import com.tamara.bankappli.model.Person;
 @Component
 @Repository
 public interface AddressRepository
-        extends JpaRepository<Address, UUID>, JpaSpecificationExecutor<Address> {
+        extends JpaRepository<Address, Long>, JpaSpecificationExecutor<Address> {
 
-	List<Address> findByPerson(Person p);
+	//List<Address> findByPerson(Person p);
 	
-	public List<Address> findByPersonID(UUID id);
+	//public List<Address> findByPersonID(Long long1);
 		
 }

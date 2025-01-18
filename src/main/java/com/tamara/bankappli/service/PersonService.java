@@ -34,7 +34,7 @@ public class PersonService {
 		return personRepo.findAll();
 	}
 	
-	public Person getByID(UUID id) {	
+	public Person getByID(Long id) {	
 		
 		return personRepo.getReferenceById(id);	
 	}

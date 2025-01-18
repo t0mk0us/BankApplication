@@ -14,7 +14,7 @@ import com.tamara.bankappli.model.Currency;
 @Component
 @Repository
 public interface CurrencyRepository 
-	extends JpaRepository<Currency, UUID>, JpaSpecificationExecutor<Currency>{
+	extends JpaRepository<Currency, Long>, JpaSpecificationExecutor<Currency>{
 	
 	public Currency findByName(String name);
 	

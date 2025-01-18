@@ -34,7 +34,7 @@ public class CountryService {
 		return countryRepo.findAll();
 	}
 	
-	public Country getByID(UUID id) {	
+	public Country getByID(Long id) {	
 		
 		return countryRepo.getReferenceById(id);	
 	}
@@ -56,7 +56,14 @@ public class CountryService {
 		return countryRepo.count();
 	}
 	
-	public void addCurrency(UUID id, Currency c) {
+	public Currency getCurrency(Long id) {
+		
+		Country country = getByID(id); 
+		
+		return country.getCurrency();
+	}
+	
+/*	public void addCurrency(Long id, Currency c) {
 		
 		Country country = getByID(id); 
 		
@@ -64,9 +71,10 @@ public class CountryService {
 		
 		currencies.add(c);
 		
-		country.setCurrencies(currencies);
+		//country.setCurrencies(currencies);
 		
 		countryRepo.save(country);
 	}
+	*/
 }
 
