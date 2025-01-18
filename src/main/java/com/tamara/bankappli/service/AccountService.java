@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tamara.bankappli.repository.AccountRepository;
+import com.tamara.bankappli.repository.PersonRepository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -32,9 +33,15 @@ public class AccountService {
 	
 	 @PersistenceContext // or even @Autowired
 	 private EntityManager entityManager;
-
-	@Autowired
-	AccountRepository accountRepo;
+	
+	private final AccountRepository accountRepo;
+	private final String name;
+	
+    @Autowired
+    public AccountService(AccountRepository accountRepo) {
+        this.accountRepo = accountRepo;
+        name = accountRepo.getName();
+    }
 
 	public List<Account> getAll(){
 		

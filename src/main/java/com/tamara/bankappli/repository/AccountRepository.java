@@ -23,5 +23,7 @@ public interface AccountRepository
 	public List<Account> findByOwner(Customer owner);
 	
 	public List<Account> findByOwnerID(Long id);
+
+	public String getName();
 	
 }

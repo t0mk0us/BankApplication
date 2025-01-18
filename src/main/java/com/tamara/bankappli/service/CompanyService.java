@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.tamara.bankappli.model.Company;
 import com.tamara.bankappli.model.Currency;
+import com.tamara.bankappli.repository.AccountRepository;
 import com.tamara.bankappli.repository.CompanyRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -23,9 +24,16 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 public class CompanyService {
-
-	@Autowired
-	CompanyRepository companyRepo;
+	
+	
+	private final CompanyRepository companyRepo;
+	private final String name;
+	
+    @Autowired
+    public CompanyService(CompanyRepository companyRepo) {
+        this.companyRepo = companyRepo;
+        name = companyRepo.getName();
+    }
 
 	public List<Company> getAll() {
 		

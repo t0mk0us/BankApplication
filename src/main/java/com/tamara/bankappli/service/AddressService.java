@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import com.tamara.bankappli.model.Address;
 import com.tamara.bankappli.model.Person;
+import com.tamara.bankappli.repository.AccountRepository;
 import com.tamara.bankappli.repository.AddressRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -16,9 +17,15 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 public class AddressService {
-
-	@Autowired
-	AddressRepository addressRepo;
+	
+	private final AddressRepository addressRepo;
+	private final String name;
+	
+    @Autowired
+    public AddressService(AddressRepository addressRepo) {
+        this.addressRepo = addressRepo;
+        name = addressRepo.getName();
+    }
 	
 	public List<Address> getAll() {
 		

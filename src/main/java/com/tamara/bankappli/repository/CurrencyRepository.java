@@ -22,4 +22,6 @@ public interface CurrencyRepository
 	
 	public Currency findByCode(String code);
 
+	public String getName();
+
 }

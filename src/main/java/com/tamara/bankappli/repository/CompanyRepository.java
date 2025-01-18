@@ -16,5 +16,7 @@ public interface CompanyRepository
 	extends JpaRepository<Company, Long>, JpaSpecificationExecutor<Company>{
 	
 	public Company findByCompanyName(String name);
+
+	public String getName();
 	
 }

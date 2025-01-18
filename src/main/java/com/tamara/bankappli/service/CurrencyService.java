@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tamara.bankappli.model.Currency;
+import com.tamara.bankappli.repository.AccountRepository;
 import com.tamara.bankappli.repository.CurrencyRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -23,8 +24,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class CurrencyService {
 
-	@Autowired
-	CurrencyRepository currencyRepo;
+	private final CurrencyRepository currencyRepo;
+	private final String name;
+	
+    @Autowired
+    public CurrencyService(CurrencyRepository currencyRepo) {
+        this.currencyRepo = currencyRepo;
+        name = currencyRepo.getName();
+    }
 
 	public List<Currency> getAll() {
 		

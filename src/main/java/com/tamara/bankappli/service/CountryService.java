@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.tamara.bankappli.model.Country;
 import com.tamara.bankappli.model.Currency;
+import com.tamara.bankappli.repository.CompanyRepository;
 import com.tamara.bankappli.repository.CountryRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -23,9 +24,16 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 public class CountryService {
-
-	@Autowired
-	CountryRepository countryRepo;
+	
+	
+	private final CountryRepository countryRepo;
+	private final String name;
+	
+    @Autowired
+    public CountryService(CountryRepository countryRepo) {
+        this.countryRepo = countryRepo;
+        name = countryRepo.getName();
+    }
 
 	public List<Country> getAll() {
 		

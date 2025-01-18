@@ -1,20 +1,10 @@
 package com.tamara.bankappli.service;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.tamara.bankappli.repository.PersonRepository;
-import com.tamara.bankappli.model.Customer;
 import com.tamara.bankappli.model.Person;
 
 import lombok.extern.slf4j.Slf4j;
@@ -24,8 +14,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class PersonService {
 
-	@Autowired
-	PersonRepository personRepo;
+	private final PersonRepository personRepo;
+	private final String name;
+	
+    @Autowired
+    public PersonService(PersonRepository personRepo) {
+        this.personRepo = personRepo;
+        name = personRepo.getName();
+    }
 
 	public List<Person> getAll() {
 		
