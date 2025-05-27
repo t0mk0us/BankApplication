@@ -18,6 +18,4 @@ public interface PersonRepository
 	
 		public Person findByFirstNameAndLastName(String firstName, String lastName);
 
-		public String getName();
-
 }

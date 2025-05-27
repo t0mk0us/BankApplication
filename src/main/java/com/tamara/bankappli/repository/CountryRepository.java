@@ -19,6 +19,4 @@ public interface CountryRepository
 	public Country findByName(String name);
 	
 	public Country findBySymbol(String symbol);
-
-	public String getName();
 }

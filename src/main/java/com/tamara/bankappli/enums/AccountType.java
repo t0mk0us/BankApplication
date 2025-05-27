@@ -2,7 +2,7 @@ package com.tamara.bankappli.enums;
 
 public enum AccountType {
 	
-	CHEQUING,
+	CHECKING,
 	SAVING,
 	RRSP,
 	REEE,

@@ -27,12 +27,10 @@ public class CountryService {
 	
 	
 	private final CountryRepository countryRepo;
-	private final String name;
 	
     @Autowired
     public CountryService(CountryRepository countryRepo) {
         this.countryRepo = countryRepo;
-        name = countryRepo.getName();
     }
 
 	public List<Country> getAll() {

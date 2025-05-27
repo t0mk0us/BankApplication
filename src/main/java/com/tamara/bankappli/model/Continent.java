@@ -23,6 +23,7 @@ public class Continent {
 	@Column(name = "id")
 	private Long ID;
 	
+	@Column(name = "name") 
 	private String name;
 
 	public Long getID() {

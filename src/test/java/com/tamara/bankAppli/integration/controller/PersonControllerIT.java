@@ -26,12 +26,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.tamara.bankAppli.BankAppConfiguration;
-
 import jakarta.servlet.ServletContext;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = { BankAppConfiguration.class })
 @WebAppConfiguration
 public class PersonControllerIT {
 
