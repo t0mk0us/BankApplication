@@ -28,17 +28,17 @@ public class Company {
 	@GeneratedValue
 	@Column(name = "id")
 	private Long ID;
-		
+
 	@Column(name = "company_name")  
 	private String companyName;
 	
-	@Enumerated(EnumType.STRING)	
+	@Enumerated(EnumType.ORDINAL)	
 	@Column(name = "company_type")
 	private CompanyType company_type;	
-	
-	@Enumerated(EnumType.STRING)
-	@Column(name = "industry")
-	private  Industry industry;
+
+	@Enumerated(EnumType.ORDINAL)
+	@JoinColumn(name = "id")
+	private Industry industry;
 	
 	@OneToOne
 	@JoinColumn(name = "contact_person")

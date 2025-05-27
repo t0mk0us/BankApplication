@@ -28,7 +28,15 @@ public class Person {
 	@GeneratedValue
 	@Column(name = "id")
 	private Long ID;
-		
+
+	public boolean isEmployee() {
+		return isEmployee;
+	}
+
+	public void setEmployee(boolean isEmployee) {
+		this.isEmployee = isEmployee;
+	}
+
 	@Column(name = "first_name")  
 	private String firstName;
 		

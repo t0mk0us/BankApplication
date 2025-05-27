@@ -15,12 +15,10 @@ import lombok.extern.slf4j.Slf4j;
 public class PersonService {
 
 	private final PersonRepository personRepo;
-	private final String name;
 	
     @Autowired
     public PersonService(PersonRepository personRepo) {
         this.personRepo = personRepo;
-        name = personRepo.getName();
     }
 
 	public List<Person> getAll() {

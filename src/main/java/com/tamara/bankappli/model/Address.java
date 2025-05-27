@@ -23,12 +23,13 @@ import jakarta.persistence.Table;
 @Table(name = "ADDRESS")
 public class Address {
 
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "id")
 	private Long ID;
 	
+	//private String name; 
+
 	@Column(name = "number")
 	private String number;
 	
@@ -50,6 +51,14 @@ public class Address {
 	
 	@Column(name = "postal_Code")
 	private String postalCode;
+	
+	public Country getCountryId() {
+		return countryId;
+	}
+	
+	public void setCountryId(Country countryId) {
+		this.countryId = countryId;
+	}
 	
 	public Long getID() {
 		return ID;
