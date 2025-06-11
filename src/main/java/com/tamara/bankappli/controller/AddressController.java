@@ -3,8 +3,6 @@ package com.tamara.bankappli.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,9 +13,9 @@ import org.springframework.http.HttpStatusCode;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.tamara.bankappli.enums.SwaggerConstant;
 import com.tamara.bankappli.model.Address;
+import com.tamara.bankappli.repository.AccountRepository;
 import com.tamara.bankappli.service.AddressService;
 
-import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -34,8 +32,12 @@ public class AddressController {
 	
 	public static final String CONTEXT_V1_ADDRESS = CONTEXT_1 + "address";
 
-	@Autowired
-	AddressService addressService;
+    private final AddressService addressService;
+	
+    @Autowired
+    public AddressController(AddressService addressService) {
+        this.addressService = addressService;
+    }
 
     @GetMapping("/list")
 

@@ -1,11 +1,6 @@
 package com.tamara.bankappli.service;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -35,12 +30,10 @@ public class AccountService {
 	 private EntityManager entityManager;
 	
 	private final AccountRepository accountRepo;
-	private final String name;
 	
     @Autowired
     public AccountService(AccountRepository accountRepo) {
         this.accountRepo = accountRepo;
-        name = accountRepo.getName();
     }
 
 	public List<Account> getAll(){

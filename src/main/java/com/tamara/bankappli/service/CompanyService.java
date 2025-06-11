@@ -1,21 +1,12 @@
 package com.tamara.bankappli.service;
 
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.tamara.bankappli.model.Company;
-import com.tamara.bankappli.model.Currency;
-import com.tamara.bankappli.repository.AccountRepository;
 import com.tamara.bankappli.repository.CompanyRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -27,12 +18,10 @@ public class CompanyService {
 	
 	
 	private final CompanyRepository companyRepo;
-	private final String name;
 	
     @Autowired
     public CompanyService(CompanyRepository companyRepo) {
         this.companyRepo = companyRepo;
-        name = companyRepo.getName();
     }
 
 	public List<Company> getAll() {

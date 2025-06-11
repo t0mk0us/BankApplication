@@ -19,8 +19,6 @@ import com.tamara.bankappli.model.Person;
 public interface AddressRepository
         extends JpaRepository<Address, Long>, JpaSpecificationExecutor<Address> {
 
-	String getName();
-
 	//List<Address> findByPerson(Person p);
 	
 	//public List<Address> findByPersonID(Long long1);

@@ -33,6 +33,8 @@ public class Account {
 	@Column(name = "id")
 	private Long ID;
 	
+	//private String name;
+	
 	@OneToOne
     @JoinColumn(name = "owner")
 	private Customer owner;
@@ -40,11 +42,11 @@ public class Account {
 	@OneToOne
 	@JoinColumn(name = "currency_id")
 	private Currency currency;
-	
+
 	@Column(name = "balance")
 	private Float balance;
 	
-	@Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "account_type")
 	private AccountType type;
 	

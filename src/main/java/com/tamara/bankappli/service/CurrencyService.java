@@ -25,12 +25,10 @@ import lombok.extern.slf4j.Slf4j;
 public class CurrencyService {
 
 	private final CurrencyRepository currencyRepo;
-	private final String name;
 	
     @Autowired
     public CurrencyService(CurrencyRepository currencyRepo) {
         this.currencyRepo = currencyRepo;
-        name = currencyRepo.getName();
     }
 
 	public List<Currency> getAll() {
