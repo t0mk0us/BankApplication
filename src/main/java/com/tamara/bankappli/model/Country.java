@@ -51,6 +51,19 @@ public class Country {
 	
 	@Column(name = "country_code_id")
 	private short country_code;
+	
+	public Country() {
+		
+	}
+	
+	public Country(String symbol, String name, Currency currency, Continent continent, short country_code) {
+		super();
+		this.symbol = symbol;
+		this.name = name;
+		this.currency = currency;
+		this.continent = continent;
+		this.country_code = country_code;
+	}
 
 	public Long getID() {
 		return ID;

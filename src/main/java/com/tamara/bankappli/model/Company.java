@@ -47,6 +47,20 @@ public class Company {
 	@OneToOne
 	@JoinColumn(name = "contact_phone")
 	private Phone contact_phone;
+	
+	public Company() {
+		
+	}
+	
+	public Company(String companyName, CompanyType company_type, Industry industry, Person contact_person,
+			Phone contact_phone) {
+		super();
+		this.companyName = companyName;
+		this.company_type = company_type;
+		this.industry = industry;
+		this.contact_person = contact_person;
+		this.contact_phone = contact_phone;
+	}
 
 	public Long getID() {
 		return ID;

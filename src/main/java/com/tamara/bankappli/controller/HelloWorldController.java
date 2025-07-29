@@ -13,7 +13,7 @@ import com.tamara.bankappli.model.Account;
 import com.tamara.bankappli.model.Address;
 
 @RestController 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3015")
 	public class HelloWorldController   
 {  
 	
@@ -23,21 +23,22 @@ import com.tamara.bankappli.model.Address;
 	@Autowired
 	AddressRepository addressRepository;
 	
-@RequestMapping("/")  
+@RequestMapping("/hello") 
+@CrossOrigin(origins = "http://localhost:3015")
 	public String hello()   
 {  
 	return "Hello User";  
 } 
 
 @RequestMapping("/bankapplication/account/list")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3015")
 	public List<Account> listAccounts() {
 		
 	return accountRepository.findAll();
 	}
 
 @RequestMapping("/bankapplication/address/list")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3015")
 	public List<Address> listAddresses() {
 		
 	return addressRepository.findAll();

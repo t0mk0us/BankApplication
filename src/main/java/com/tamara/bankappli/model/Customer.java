@@ -33,10 +33,70 @@ public class Customer {
 	@Column(name = "id")
 	private Long ID;
 	
+	@Column(name = "first_name") 
+	private String firstName;
+	
+	@Column(name = "last_name") 
+	private String lastName;
+	
+	@Column(name = "date_of_birth") 
+	private Date dob;
+	
+	@OneToOne
+    @JoinColumn(name = "place_of_work")
+	private Company placeOfWork;
+	
+	@OneToOne
+    @JoinColumn(name = "phone_id")
+	private Phone phone;
+	
+	@OneToOne
+    @JoinColumn(name = "address_id")
+	private Address address;
+	
+	@Column(name = "user_name") 
+	private String userName;
+	
+	@Column(name = "password") 
+	private String password;
+	/*
+	 * public CustomerType getCustomer_type() { return customer_type; }
+	 * 
+	 * public void setCustomer_type(CustomerType customer_type) { this.customer_type
+	 * = customer_type; }
+	 */
+	
 	/*
 	 * @Column(name = "customer_type") private CustomerType customer_type;
 	 */
 
+	public Customer() {
+		
+	}
+	
+	public Customer(String firstName, String lastName, Date dob, Company placeOfWork, Phone phone, Address address,
+			String userName, String password) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.dob = dob;
+		this.placeOfWork = placeOfWork;
+		this.phone = phone;
+		this.address = address;
+		this.userName = userName;
+		this.password = password;
+	}
+	
+	public Long getID() {
+		
+		return ID;
+	}
+
+	public void setID(Long iD) {
+		
+		ID = iD;
+	}
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -100,47 +160,4 @@ public class Customer {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	public Long getID() {
-		
-		return ID;
-	}
-
-	public void setID(Long iD) {
-		
-		ID = iD;
-	}
-	
-	@Column(name = "first_name") 
-	private String firstName;
-	
-	@Column(name = "last_name") 
-	private String lastName;
-	
-	@Column(name = "date_of_birth") 
-	private Date dob;
-	
-	@OneToOne
-    @JoinColumn(name = "place_of_work")
-	private Company placeOfWork;
-	
-	@OneToOne
-    @JoinColumn(name = "phone_id")
-	private Phone phone;
-	
-	@OneToOne
-    @JoinColumn(name = "address_id")
-	private Address address;
-	
-	@Column(name = "user_name") 
-	private String userName;
-	
-	@Column(name = "password") 
-	private String password;
-	/*
-	 * public CustomerType getCustomer_type() { return customer_type; }
-	 * 
-	 * public void setCustomer_type(CustomerType customer_type) { this.customer_type
-	 * = customer_type; }
-	 */
 }

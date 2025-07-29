@@ -26,6 +26,15 @@ public class Continent {
 	@Column(name = "name") 
 	private String name;
 
+	public Continent() {
+		
+	}
+	
+	public Continent(String name) {
+		super();
+		this.name = name;
+	}
+
 	public Long getID() {
 		return ID;
 	}

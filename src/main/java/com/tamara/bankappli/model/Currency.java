@@ -32,6 +32,17 @@ public class Currency {
 	@Column(name = "symbol")
 	private String symbol;
 	
+	public Currency() {
+		
+	}
+	
+	public Currency(String name, String code, String symbol) {
+		super();
+		this.name = name;
+		this.code = code;
+		this.symbol = symbol;
+	}
+	
 	public Long getID() {
 		return ID;
 	}

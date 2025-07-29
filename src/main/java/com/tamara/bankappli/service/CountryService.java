@@ -24,11 +24,9 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 public class CountryService {
-	
-	
+		
 	private final CountryRepository countryRepo;
 	
-    @Autowired
     public CountryService(CountryRepository countryRepo) {
         this.countryRepo = countryRepo;
     }

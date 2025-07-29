@@ -31,7 +31,6 @@ public class AccountService {
 	
 	private final AccountRepository accountRepo;
 	
-    @Autowired
     public AccountService(AccountRepository accountRepo) {
         this.accountRepo = accountRepo;
     }

@@ -53,12 +53,24 @@ public class Phone  implements Serializable {
 	 * @JoinColumn(name = "phone_type")
 	 */
 	//private PhoneType phone_type;
+	
+	public Phone() {
 		
+	}
+	
+	public Phone(Long country_code, Long area_code, Integer phone_number, short phone_type) {
+		super();
+		this.country_code = country_code;
+		this.area_code = area_code;
+		this.phone_number = phone_number;
+		this.phone_type = phone_type;
+	}
+	
 	public Long getID() {
 		
 		return ID;
 	}
-	
+
 	public void setID(Long iD) {
 		
 		ID = iD;

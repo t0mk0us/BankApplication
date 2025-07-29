@@ -26,7 +26,6 @@ public class CurrencyService {
 
 	private final CurrencyRepository currencyRepo;
 	
-    @Autowired
     public CurrencyService(CurrencyRepository currencyRepo) {
         this.currencyRepo = currencyRepo;
     }
@@ -43,16 +42,18 @@ public class CurrencyService {
 		return currencyRepo.getReferenceById(id);	
 	}
 	
-	public Currency saveCurrency(Currency c) {
+	public String saveCurrency(Currency c) {
 		
-		return currencyRepo.save(c);
+		Long newCurrId = currencyRepo.save(c).getID();
+		
+		return "New currency was successfully saved with ID = " + newCurrId;		
 	}
 	
-	public void deleteCurrency(Currency c) {
+	public String deleteCurrency(Currency c) {
 		
 		currencyRepo.delete(c);
 		
-		return;
+		return "Currency with ID was successfully deleted = " + c.getID();
 	}
 	
 	public long countCurrencys() {

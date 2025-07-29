@@ -15,11 +15,9 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 public class CompanyService {
-	
-	
+		
 	private final CompanyRepository companyRepo;
 	
-    @Autowired
     public CompanyService(CompanyRepository companyRepo) {
         this.companyRepo = companyRepo;
     }

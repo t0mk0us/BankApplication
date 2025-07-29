@@ -37,6 +37,10 @@ public class Account {
 	
 	@OneToOne
     @JoinColumn(name = "owner")
+	//Aggregation has-a
+	//Customer exists independently of an account
+	//Even if a Customer closes particular account,
+	//He could still stay a customer
 	private Customer owner;
 	
 	@OneToOne
@@ -67,11 +71,24 @@ public class Account {
 	 * @Column(name = "debit_interest") private Float debit_interest;
 	 */
 	
+	public Account() {
+		
+	}
+	
+	public Account(Customer owner, Currency currency, Float balance, AccountType type, Float fees) {
+		super();
+		this.owner = owner;
+		this.currency = currency;
+		this.balance = balance;
+		this.type = type;
+		this.fees = fees;
+	}
+	
 	public Long getID() {
 		
 		return ID;
 	}
-	
+
 	public void setID(Long iD) {
 		
 		ID = iD;

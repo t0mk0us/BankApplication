@@ -18,7 +18,6 @@ public class AddressService {
 	
 	private final AddressRepository addressRepo;
 	
-    @Autowired
     public AddressService(AddressRepository addressRepo) {
         this.addressRepo = addressRepo;
     }

@@ -47,11 +47,30 @@ public class Address {
 	
 	@OneToOne
 	@JoinColumn(name = "country_id")
+	//Aggregation
+	//Country exists independently of an account
+	//Country will still exist, even a particular Address disappears
 	private Country countryId;
 	
 	@Column(name = "postal_Code")
 	private String postalCode;
 	
+	public Address() {
+		
+	}
+	
+	public Address(String number, String street, String appartment, String city, String state_province,
+			Country countryId, String postalCode) {
+		super();
+		this.number = number;
+		this.street = street;
+		this.appartment = appartment;
+		this.city = city;
+		this.state_province = state_province;
+		this.countryId = countryId;
+		this.postalCode = postalCode;
+	}
+
 	public Country getCountryId() {
 		return countryId;
 	}

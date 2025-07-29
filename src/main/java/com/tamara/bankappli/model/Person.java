@@ -29,14 +29,6 @@ public class Person {
 	@Column(name = "id")
 	private Long ID;
 
-	public boolean isEmployee() {
-		return isEmployee;
-	}
-
-	public void setEmployee(boolean isEmployee) {
-		this.isEmployee = isEmployee;
-	}
-
 	@Column(name = "first_name")  
 	private String firstName;
 		
@@ -70,6 +62,25 @@ public class Person {
 	
 	@Column(name = "is_employee")
 	private boolean isEmployee;
+
+	public Person() {
+		
+	}
+	
+	public Person(String firstName, String lastName, Gender gender, Company placeOfWork, Address address,
+			List<Phone> phones, Date dOB, List<Account> accounts, boolean isCustomer, boolean isEmployee) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.gender = gender;
+		this.placeOfWork = placeOfWork;
+		this.address = address;
+		this.phones = phones;
+		DOB = dOB;
+		this.accounts = accounts;
+		this.isCustomer = isCustomer;
+		this.isEmployee = isEmployee;
+	}
 
 	public Long getID() {
 		
@@ -168,4 +179,12 @@ public class Person {
 	public void setCustomer(boolean isCustomer) {
 		this.isCustomer = isCustomer;
 	} 
+	
+	public boolean isEmployee() {
+		return isEmployee;
+	}
+
+	public void setEmployee(boolean isEmployee) {
+		this.isEmployee = isEmployee;
+	}
 }
