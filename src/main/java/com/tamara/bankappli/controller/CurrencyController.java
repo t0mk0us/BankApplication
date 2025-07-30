@@ -67,7 +67,7 @@ public class CurrencyController{
     	return new ResponseEntity<Long>(((CurrencyService) currencyService).countCurrencys(), HttpStatus.OK);
     }
     
-    @GetMapping("/find")
+    @GetMapping("/find/{id}")
     @CrossOrigin(origins = "http://localhost:3015")
     @ApiOperation(value = "Trouver une devise par id")
     @ApiResponses({

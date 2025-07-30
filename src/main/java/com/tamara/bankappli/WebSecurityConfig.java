@@ -18,7 +18,7 @@ public class WebSecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http
 			.authorizeHttpRequests((requests) -> requests
-				.requestMatchers("/", "/home", "/bankapplication/account/list", "/bankapplication/address/list", "/hello").permitAll()
+				.requestMatchers("/", "/home", "/bankapplication/account/count/*", "/bankapplication/address/list", "/hello").permitAll()
 				.anyRequest().authenticated()
 			)
 			.formLogin((form) -> form

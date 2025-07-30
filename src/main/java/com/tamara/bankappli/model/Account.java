@@ -17,12 +17,14 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.tamara.bankappli.enums.AccountStatus;
 import com.tamara.bankappli.enums.AccountType;
 import com.tamara.bankappli.model.Customer;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Component
 @Table(name = "ACCOUNT")

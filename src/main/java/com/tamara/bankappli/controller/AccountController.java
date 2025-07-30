@@ -66,15 +66,15 @@ public class AccountController{
     	return new ResponseEntity<Long>(((AccountService) accountService).countAccounts(), HttpStatus.OK);
     }
     
-    @GetMapping("/find")
+    @GetMapping("/{id}")
     @CrossOrigin(origins = "http://localhost:3015")
     @ApiOperation(value = "Trouver un compte par id")
     @ApiResponses({
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<Account> AccountByID(@ApiParam(value = "ID") @RequestParam(required = true) Long id) throws JsonProcessingException {
-    	log.info("Trouver un compte par ID " + "ID");
+    public ResponseEntity<Account> AccountByID(@ApiParam(value = "id") @RequestParam(required = true) Long id) throws JsonProcessingException {
+    	log.info("Trouver un compte par ID " + "id");
     	return new ResponseEntity<Account>(((AccountService) accountService).getByID(id), HttpStatus.OK);
     }
     
