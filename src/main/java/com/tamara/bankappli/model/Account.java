@@ -17,6 +17,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.tamara.bankappli.enums.AccountStatus;
 import com.tamara.bankappli.enums.AccountType;
@@ -33,10 +34,9 @@ public class Account {
 	@Column(name = "id")
 	private Long ID;
 	
-	//private String name;
-	
+	@JsonManagedReference
 	@OneToOne
-    @JoinColumn(name = "owner")
+    @JoinColumn(name = "customer_id")
 	//Aggregation has-a
 	//Customer exists independently of an account
 	//Even if a Customer closes particular account,

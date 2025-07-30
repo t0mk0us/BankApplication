@@ -6,6 +6,8 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.tamara.bankappli.enums.Gender;
 
@@ -38,9 +40,13 @@ public class Person {
 	@Column(name = "gender")
 	private Gender gender;
 	
-	@OneToOne
-	@JoinColumn(name = "place_of_work")
-	private Company placeOfWork;
+	/*
+	 * @JsonManagedReference
+	 * 
+	 * @OneToOne
+	 * 
+	 * @JoinColumn(name = "place_of_work") private Company placeOfWork;
+	 */
 		
 	@OneToOne
 	@JoinColumn(name = "address_id")
@@ -52,7 +58,8 @@ public class Person {
 		
 	@Column(name = "dob")
 	private Date DOB;
-		
+	
+	@JsonBackReference
 	@OneToMany
 	@JoinColumn(name = "account_id")
 	private List<Account> accounts;
@@ -73,7 +80,6 @@ public class Person {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.gender = gender;
-		this.placeOfWork = placeOfWork;
 		this.address = address;
 		this.phones = phones;
 		DOB = dOB;
@@ -122,16 +128,15 @@ public class Person {
 		this.gender = gender;
 	}
 
-	public Company getPlaceOfWork() {
-		
-		return placeOfWork;
-	}
-
-	public void setPlaceOfWork(Company placeOfWork) {
-		
-		this.placeOfWork = placeOfWork;
-	}
-
+	/*
+	 * public Company getPlaceOfWork() {
+	 * 
+	 * return placeOfWork; }
+	 * 
+	 * public void setPlaceOfWork(Company placeOfWork) {
+	 * 
+	 * this.placeOfWork = placeOfWork; }
+	 */
 	public Address getAddress() {
 		
 		return address;

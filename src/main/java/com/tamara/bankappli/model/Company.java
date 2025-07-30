@@ -4,6 +4,8 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.tamara.bankappli.enums.CompanyType;
 import com.tamara.bankappli.enums.Industry;
@@ -40,6 +42,7 @@ public class Company {
 	@JoinColumn(name = "id")
 	private Industry industry;
 	
+	@JsonBackReference
 	@OneToOne
 	@JoinColumn(name = "contact_person")
 	private Person contact_person;
