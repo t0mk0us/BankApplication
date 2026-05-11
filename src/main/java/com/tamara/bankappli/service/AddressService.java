@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.tamara.bankappli.model.Address;
 import com.tamara.bankappli.repository.AddressRepository;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import lombok.extern.slf4j.Slf4j;
 
 @Service

@@ -3,16 +3,30 @@ package com.tamara.bankappli.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tamara.bankappli.repository.AccountRepository;
 import com.tamara.bankappli.repository.AddressRepository;
+import com.tamara.bankappli.repository.CurrencyRepository;
+import com.tamara.bankappli.repository.PersonRepository;
+import com.tamara.bankappli.repository.UserRepository;
+import com.tamara.bankappli.service.AccountService;
+
+import lombok.extern.java.Log;
+
 import com.tamara.bankappli.model.Account;
 import com.tamara.bankappli.model.Address;
+import com.tamara.bankappli.model.Currency;
+import com.tamara.bankappli.model.Customer;
+import com.tamara.bankappli.model.Person;
+import com.tamara.bankappli.model.User;
 
 @RestController 
 @CrossOrigin(origins = "http://localhost:3015")
@@ -25,37 +39,123 @@ import com.tamara.bankappli.model.Address;
 	@Autowired
 	AddressRepository addressRepository;
 	
-@RequestMapping("/hello") 
-@CrossOrigin(origins = "http://localhost:3015")
-	public String hello()   
-{  
-	return "Hello User";  
-} 
-
-@RequestMapping("/bankapplication/account/list")
-@CrossOrigin(origins = "http://localhost:3015")
-	public List<Account> listAccounts() {
-		
-	return accountRepository.findAll();
+	@Autowired
+	CurrencyRepository currencyRepository;
+	
+	@Autowired
+	PersonRepository personRepository;
+	
+	@Autowired
+	UserRepository userRepository;
+	
+	@Autowired
+	AccountService accountService;
+	
+	@RequestMapping("/home") 
+	@CrossOrigin(origins = "http://localhost:3015")
+		public String getHome()   
+	{  
+		return "Welcome to Tamara's Bank!";  
+	}	
+	
+	
+	@GetMapping("/hello") 
+	@CrossOrigin(origins = "http://localhost:3015")
+		public String getHello()   
+	{  
+		return "Hello User";  
+	} 
+	
+	@GetMapping("/bankapplication/account/list")
+	@CrossOrigin(origins = "http://localhost:3015")
+		public List<Account> listAccounts() {
+			
+		return accountRepository.findAll();
+		}
+	
+	@GetMapping("/bankapplication/account/count")
+	@CrossOrigin(origins = "http://localhost:3015")
+		public long countAccounts() {
+			
+		return accountRepository.count();
+		}
+	
+	@GetMapping("/bankapplication/account/{id}")
+	@CrossOrigin(origins = "http://localhost:3015")
+	public Account findAccountById(@PathVariable Long id) { 
+		System.out.println("Searching for accounts  with id " + id);
+		  	return accountRepository.getReferenceById(id); 
 	}
-
-@RequestMapping("/bankapplication/account/count")
-@CrossOrigin(origins = "http://localhost:3015")
-	public long countAccounts() {
+	
+	@GetMapping("/bankapplication/account/by_owner/{ownerId}")  
+	@CrossOrigin(origins = "http://localhost:3015")
+		public List<Account> findAccountsByOwner (@PathVariable Long ownerId) {
+			System.out.println("Searching for accounts of the person with id " + ownerId);
+					
+		return accountRepository.findByOwnerID(ownerId);
+		}
+	
+	@GetMapping("/bankapplication/account/by_owner/{lastName}/{firstName}")  
+	@CrossOrigin(origins = "http://localhost:3015")
+		public List<Account> findAccountsByOwnerFirstNameAndLastNames (@PathVariable String firstName, @PathVariable String lastName) {
+			System.out.println("Searching for accounts of  " + firstName + " " + lastName);
+					
+		return accountRepository.findByOwnerFirstNameAndLastName(firstName, lastName);
+		}
+	
+	@GetMapping("/bankapplication/address/list")
+	@CrossOrigin(origins = "http://localhost:3015")
+		public List<Address> listAddresses() {
+			
+		return addressRepository.findAll();
+		}
+	
+	@GetMapping("/bankapplication/currency/list")
+	@CrossOrigin(origins = "http://localhost:3015")
+		public List<Currency> listCurrencies() {
+			
+		return currencyRepository.findAll();
+		}
+	
+	@GetMapping("/bankapplication/person/firstName/{firstName}/lastName/{lastName}")  
+	@CrossOrigin(origins = "http://localhost:3015")
+		public Person findPersonByFirstAndLast(@PathVariable String firstName, @PathVariable String lastName) {
+			System.out.println("Searching for " + firstName + " and " + lastName);
+					
+		return personRepository.findByFirstNameAndLastName(firstName, lastName);
+		}
+	
+	@PostMapping("/bankapplication/login/{userName}/{userPass}")
+	@CrossOrigin(origins = "http://localhost:3015")
+		public User LoginRequest(@PathVariable String userName, @PathVariable String userPass) {
+			
+		User u = userRepository.findByNameAndPassword(userName, userPass);
 		
-	return accountRepository.count();
+		if (u != null) {
+			
+			System.out.println("Found User. Credentials are OK!");
+			return u;
+			}
+			else {
+			
+			return null;
+		}
 	}
-
-@GetMapping("/bankapplication/account/{id}")
-@CrossOrigin(origins = "http://localhost:3015")
-public Account findAccountById(@PathVariable Long id) { 
-	  	return accountRepository.getReferenceById(id); 
+	
+	@GetMapping("/bankapplication/login/{userName}/{userPass}")
+	@CrossOrigin(origins = "http://localhost:3015")
+		public String LoginGetRequest(@PathVariable String userName, @PathVariable String userPass) {
+			
+		User u = userRepository.findByNameAndPassword(userName, userPass);
+		
+		if (u != null) {
+			
+			System.out.println("Found User. Credentials are OK!");
+			return "User " + userName + " having role " + u.getRole() + " logged successfully ";
+			}
+			else {
+			
+			return "Incorrect credentials for " + userName;
+		}
+	}
 }
-
-@RequestMapping("/bankapplication/address/list")
-@CrossOrigin(origins = "http://localhost:3015")
-	public List<Address> listAddresses() {
-		
-	return addressRepository.findAll();
-	}
-}  
