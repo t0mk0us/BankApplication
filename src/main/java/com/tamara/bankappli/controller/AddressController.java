@@ -43,7 +43,7 @@ public class AddressController {
 
     @GetMapping("/list")
     @CrossOrigin(origins = "http://localhost:3015")
-    @ApiOperation(value = "Lister les comptes")
+    @ApiOperation(value = "Lister les adresses")
     @ApiResponses({
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)

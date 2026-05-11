@@ -54,9 +54,9 @@ public class Person {
 	@JoinColumn(name = "address_id")
 	private Address address;
 		
-	@OneToMany
+	@OneToOne
 	@JoinColumn(name = "phone_id")
-	private List<Phone> phones;
+	private Phone phones;
 		
 	@Column(name = "dob")
 	private Date DOB;
@@ -77,7 +77,7 @@ public class Person {
 	}
 	
 	public Person(String firstName, String lastName, Gender gender, Company placeOfWork, Address address,
-			List<Phone> phones, Date dOB, List<Account> accounts, boolean isCustomer, boolean isEmployee) {
+			Phone phones, Date dOB, List<Account> accounts, boolean isCustomer, boolean isEmployee) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -149,12 +149,12 @@ public class Person {
 		this.address = address;
 	}
 
-	public List<Phone> getPhones() {
+	public Phone getPhones() {
 		
 		return phones;
 	}
 
-	public void setPhones(List<Phone> phones) {
+	public void setPhones(Phone phones) {
 		
 		this.phones = phones;
 	}

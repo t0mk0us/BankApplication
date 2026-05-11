@@ -33,6 +33,12 @@ public class PersonService {
 		return personRepo.getReferenceById(id);	
 	}
 	
+	public Person getByFirstAndLast(String fname, String lname) {
+		
+		return personRepo.findByFirstNameAndLastName(fname, lname);
+		
+	}
+	
 	public Person saveCustomer(Person p) {
 		
 		return personRepo.save(p);

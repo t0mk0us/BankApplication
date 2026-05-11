@@ -13,8 +13,12 @@ public class MvcConfig implements WebMvcConfigurer {
 		registry.addViewController("/home").setViewName("home");
 		registry.addViewController("/").setViewName("home");
 		registry.addViewController("/hello").setViewName("hello");
-		registry.addViewController("/bankapplication/address/").setViewName("Address");
-		//registry.addViewController("/login").setViewName("login");
+		registry.addViewController("/bankapplication/address/*").setViewName("Address");
+		registry.addViewController("/bankapplication/account/*").setViewName("Account");
+		registry.addViewController("/bankapplication/currency/*").setViewName("Currency");
+		registry.addViewController("/bankapplication/person/*").setViewName("Person");
+		registry.addViewController("/bankapplication/login").setViewName("Login");
+		registry.addViewController("/login").setViewName("login");
 	}
 	
     @Override
@@ -22,8 +26,9 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addMapping("/**") // Apply to all endpoints
                 .allowedOrigins("http://localhost:3015") // Replace with your React app's origin
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
-                .allowedHeaders("*")
-                .allowCredentials(true);
+                //.allowedHeaders("*")
+                .allowedHeaders("Content-Type", "Authorization", "Access-Control-Allow-Origin")
+                .allowCredentials(true)
+                .maxAge(3600);
     }
-
 }
