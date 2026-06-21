@@ -20,7 +20,7 @@ public class WebSecurityConfig {
 			.authorizeHttpRequests((requests) -> requests
 				.requestMatchers("/*", "/bankapplication/account/*", "/bankapplication/account/by_owner/*",
 						"/bankapplication/address/*", "/hello", "/login", "/bankapplication/login",
-						"/bankapplication/currency/*", "/bankapplication/person/*").permitAll()			
+						"/bankapplication/currency/*", "/bankapplication/person/*", "/account/*").permitAll()			
 				.anyRequest().authenticated()
 			)
 			.formLogin((form) -> form

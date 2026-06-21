@@ -69,4 +69,11 @@ public class Currency {
 	public void setSymbol(String symbol) {
 		this.symbol = symbol;
 	}
+
+	@Override
+	public String toString() {
+		return "Currency [ID=" + ID + ", name=" + name + ", code=" + code + ", symbol=" + symbol + "]";
+	}
+	
+	
 }

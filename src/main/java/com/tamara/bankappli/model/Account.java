@@ -202,7 +202,7 @@ public class Account {
 	
 	@Override
 	public String toString() {
-		return "Account [ID=" + ID + ", + type =" + type + ", currency="
-				+ currency + "]";
+		return "Account [ID=" + ID + ", Owner = " + owner.getFirstName() + owner.getLastName() + ", + type =" + type + ", currency="
+				+ currency.toString() + ", Balance = " + balance + "]";
 		}
 }
