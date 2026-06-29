@@ -41,7 +41,7 @@ public class AccountController{
 	
 	//public static final String CONTEXT_1 = "http://design4logic/apps/bankapplication"; 
 	
-	public static final String CONTEXT_1 = "http:/localhost:8080/bankapplication/"; 
+	public static final String CONTEXT_1 = "http:/localhost:8090/bankapplication/"; 
 	public static final String CONTEXT_V1_ACCOUNT = CONTEXT_1 + "account";
 
 	@Autowired

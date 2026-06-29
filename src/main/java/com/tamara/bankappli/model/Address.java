@@ -26,7 +26,7 @@ import jakarta.persistence.Table;
 public class Address {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long ID;
 	

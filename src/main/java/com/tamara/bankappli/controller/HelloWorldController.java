@@ -1,6 +1,7 @@
 package com.tamara.bankappli.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ import com.tamara.bankappli.repository.AccountRepository;
 import com.tamara.bankappli.repository.AddressRepository;
 import com.tamara.bankappli.repository.CurrencyRepository;
 import com.tamara.bankappli.repository.PersonRepository;
-import com.tamara.bankappli.repository.UserRepository;
+import com.tamara.bankappli.repository.BankUserRepository;
 import com.tamara.bankappli.service.AccountService;
 
 import lombok.extern.java.Log;
@@ -26,7 +27,7 @@ import com.tamara.bankappli.model.Address;
 import com.tamara.bankappli.model.Currency;
 import com.tamara.bankappli.model.Customer;
 import com.tamara.bankappli.model.Person;
-import com.tamara.bankappli.model.User;
+import com.tamara.bankappli.model.BankUser;
 
 @RestController 
 @CrossOrigin(origins = "http://localhost:3015")
@@ -46,7 +47,7 @@ import com.tamara.bankappli.model.User;
 	PersonRepository personRepository;
 	
 	@Autowired
-	UserRepository userRepository;
+	BankUserRepository userRepository;
 	
 	@Autowired
 	AccountService accountService;
@@ -65,6 +66,12 @@ import com.tamara.bankappli.model.User;
 	{  
 		return "Hello User";  
 	} 
+
+	@GetMapping("/bankapplication/login") 
+	@CrossOrigin(origins = "http://localhost:3015")
+    public String loginPage() {
+        return "forward:/login.html"; // Routes directly to your custom templates/login.html view
+    }
 	
 	@GetMapping("/bankapplication/account/list")
 	@CrossOrigin(origins = "http://localhost:3015")
@@ -125,33 +132,16 @@ import com.tamara.bankappli.model.User;
 		return personRepository.findByFirstNameAndLastName(firstName, lastName);
 		}
 	
-	@PostMapping("/bankapplication/login/{userName}/{userPass}")
-	@CrossOrigin(origins = "http://localhost:3015")
-		public User LoginRequest(@PathVariable String userName, @PathVariable String userPass) {
-			
-		User u = userRepository.findByNameAndPassword(userName, userPass);
-		
-		if (u != null) {
-			
-			System.out.println("Found User. Credentials are OK!");
-			return u;
-			}
-			else {
-			
-			return null;
-		}
-	}
-	
 	@GetMapping("/bankapplication/login/{userName}/{userPass}")
 	@CrossOrigin(origins = "http://localhost:3015")
 		public String LoginGetRequest(@PathVariable String userName, @PathVariable String userPass) {
 			
-		User u = userRepository.findByNameAndPassword(userName, userPass);
+		Optional<BankUser> u = userRepository.findByUserNameAndPassword(userName, userPass);
 		
 		if (u != null) {
 			
 			System.out.println("Found User. Credentials are OK!");
-			return "User " + userName + " having role " + u.getRole() + " logged successfully ";
+			return "User " + userName + " logged successfully ";
 			}
 			else {
 			

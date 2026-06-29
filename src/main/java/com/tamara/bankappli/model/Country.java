@@ -28,7 +28,7 @@ import jakarta.persistence.Table;
 public class Country {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long ID;
 

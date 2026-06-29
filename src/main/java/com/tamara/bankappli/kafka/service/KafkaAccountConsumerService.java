@@ -9,7 +9,7 @@ import com.tamara.bankappli.model.Account;
 @Service
 public class KafkaAccountConsumerService {
 
-	    @KafkaListener(topics = "quickstart", groupId = "json-group")
+	    @KafkaListener(topics = "test-topic", groupId = "json-group")
 	    public void consume(Account account) {
 	        // You can read properties natively without manual ObjectMapper parsing
 	        System.out.printf("Consumed JSON -> Account: %s, Action: %s%n", 

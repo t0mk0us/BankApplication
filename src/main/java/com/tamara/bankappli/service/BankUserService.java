@@ -1,50 +1,52 @@
 package com.tamara.bankappli.service;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import com.tamara.bankappli.repository.UserRepository;
-import com.tamara.bankappli.model.User;
+import com.tamara.bankappli.repository.BankUserRepository;
+import com.tamara.bankappli.model.BankUser;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Component
 @Slf4j
-public class UserService {
+public class BankUserService {
 
-	private final UserRepository userRepo;
+	private final BankUserRepository userRepo;
 	
     @Autowired
-    public UserService(UserRepository userRepo) {
+    public BankUserService(BankUserRepository userRepo) {
         this.userRepo = userRepo;
     }
 
-	public List<User> getAll() {
+	public List<BankUser> getAll() {
 		
 		log.info("Listing Users");
 		
 		return userRepo.findAll();
 	}
 	
-	public User getByID(Long id) {	
+	public BankUser getByID(Long id) {	
 		
 		return userRepo.getReferenceById(id);	
 	}
 	
-	public User getByUserName(String userName) {
+	public Optional<BankUser> getByUserName(String userName) {
 		
-		return userRepo.findByName(userName);
+		return userRepo.findByUserName(userName);
 		
 	}
 		
-		public User saveUser(User p) {
+		public BankUser saveUser(BankUser p) {
 			
 			return userRepo.save(p);
 		}
 		
-		public void deletePerson(User p) {
+		public void deletePerson(BankUser p) {
 			
 			userRepo.delete(p);
 			
