@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatusCode;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.tamara.bankappli.enums.SwaggerConstant;
 import com.tamara.bankappli.model.BankUser;
+import com.tamara.bankappli.service.AccountService;
 import com.tamara.bankappli.service.BankUserService;
 
 import io.swagger.annotations.ApiParam;
@@ -31,8 +32,12 @@ public class BankUserController {
 	
 	public static final String CONTEXT_V1_USER = CONTEXT_1 + "user";
 
-	@Autowired
-	BankUserService userService;
+    private final BankUserService userService;
+	
+    @Autowired
+    public BankUserController(BankUserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/list")
     @ApiResponses({

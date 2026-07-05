@@ -14,7 +14,7 @@ import com.tamara.bankappli.model.Person;
 @Component
 @Repository
 public interface PersonRepository 
-	extends JpaRepository<Person, Long>, JpaSpecificationExecutor<Person>{
+	extends JpaRepository<Person, Long>{
 	
 		public Person findByFirstNameAndLastName(String firstName, String lastName);
 

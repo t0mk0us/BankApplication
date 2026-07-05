@@ -46,9 +46,10 @@ public class AddressService {
 	 * return addressRepo.findByPersonID(long1); }
 	 */
 	
-	public Address saveAddress(Address a) {
-		
-		return addressRepo.save(a);	
+	public String saveAddress(Address a) {
+				
+		Long newCntrId = addressRepo.save(a).getID();
+        return "New country was successfully saved with ID = " + newCntrId;
 	}
 	
 	public void deleteAddress(Address a) {

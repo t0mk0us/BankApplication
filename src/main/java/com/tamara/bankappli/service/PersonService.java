@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import com.tamara.bankappli.repository.PersonRepository;
 import com.tamara.bankappli.model.Person;
+import com.tamara.bankappli.model.Person;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,17 +40,15 @@ public class PersonService {
 		
 	}
 	
-	public Person saveCustomer(Person p) {
-		
-		return personRepo.save(p);
-	}
+    public String savePerson(Person a) {
+        Long newPrsId = personRepo.save(a).getID();
+        return "New person was successfully saved with ID = " + newPrsId;	
+    }
 	
-	public void deletePerson(Person p) {
-		
-		personRepo.delete(p);
-		
-		return;
-	}
+    public String deletePerson(Person a) {
+        personRepo.delete(a);
+        return "Person with ID was successfully deleted = " + a.getID();
+    }
 	
 	public long countPersons() {
 		
