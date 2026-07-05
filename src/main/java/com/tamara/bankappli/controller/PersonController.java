@@ -15,8 +15,6 @@ import org.springframework.http.HttpStatusCode;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.tamara.bankappli.enums.SwaggerConstant;
 import com.tamara.bankappli.model.Person;
-import com.tamara.bankappli.model.Person;
-import com.tamara.bankappli.service.PersonService;
 import com.tamara.bankappli.service.PersonService;
 
 import io.swagger.annotations.ApiOperation;
