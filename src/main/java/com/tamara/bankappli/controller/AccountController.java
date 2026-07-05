@@ -36,6 +36,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3015")
+//@CrossOrigin(origins = "http://localhost:3015", allowCredentials = "true")
 @RequestMapping(value = AccountController.CONTEXT_V1_ACCOUNT) // Now resolves clean relative context paths
 @Slf4j
 public class AccountController {
@@ -52,40 +53,36 @@ public class AccountController {
     }
 
     @GetMapping("/list")
-	//@CrossOrigin(origins = "http://localhost:3015")
     @ApiOperation(value = "Lister les comptes")
     @ApiResponses({
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<List<Account>> AccountLookUp() throws JsonProcessingException {
+    public ResponseEntity<List<Account>> accountLookUp() throws JsonProcessingException {
     	log.info("Lister tous les comptes existantes dans ACCOUNT");
     	return new ResponseEntity<List<Account>>(accountService.getAll(), HttpStatusCode.valueOf(200));
     }
 	
     @GetMapping("/count")
-    //@CrossOrigin(origins = "http://localhost:3015")
     @ApiOperation(value = "Compter le nombre des comptes")
     @ApiResponses({
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<Long> CountAccounts() throws JsonProcessingException {
+    public ResponseEntity<Long> countAccounts() throws JsonProcessingException {
     	log.info("Compter le nombre total des comptes");
-    	return new ResponseEntity<Long>(((AccountService) accountService).countAccounts(), HttpStatus.OK);
+    	return new ResponseEntity<Long>(accountService.countAccounts(), HttpStatus.OK);
     }
     
     @GetMapping("/{id}")
-    //@CrossOrigin(origins = "http://localhost:3015")
-    //@CrossOrigin(origins = "http://localhost:3015", allowCredentials = "true")
     @ApiOperation(value = "Trouver un compte par id")
     @ApiResponses({
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<Account> AccountByID(@ApiParam(value = "id") @PathVariable("id") Long id) throws JsonProcessingException, AccountNotFoundException {
+    public ResponseEntity<Account> accountByID(@ApiParam(value = "id") @PathVariable("id") Long id) throws JsonProcessingException, AccountNotFoundException {
     	log.info("Trouver un compte par ID " + id);
-    	return new ResponseEntity<Account>(((AccountService) accountService).getByID(id), HttpStatus.OK);
+    	return new ResponseEntity<Account>(accountService.getByID(id), HttpStatus.OK);
     }
        
     @GetMapping("/by_owner/{ownerId}")
@@ -95,50 +92,32 @@ public class AccountController {
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
     // CHANGE THIS: Swap @RequestParam for @PathVariable
-    public ResponseEntity<List<Account>> AccountByCustomerID(
+    public ResponseEntity<List<Account>> accountByCustomerID(
             @ApiParam(value = "id") @PathVariable("ownerId") Long ownerId
     ) throws JsonProcessingException, AccountNotFoundException {
         
         log.info("Trouver un compte par ID du client " + ownerId);
-        return new ResponseEntity<List<Account>>(((AccountService) accountService).getByCustomerID(ownerId), HttpStatus.OK);
+        return new ResponseEntity<List<Account>>(accountService.getByCustomerID(ownerId), HttpStatus.OK);
     }
     
     // 1. Updated path order to match your React pattern: /by_owner/firstName/lastName
     // 2. Double-check your method uses @PathVariable matching your parameter sequence
-    @GetMapping("/by_owner/{firstName}/{lastName}")  
+    @GetMapping("/by_owner/{firstName}/{lastName}")
+    @ApiOperation(value = "Trouver un compte par prenom et nom de client")
     public ResponseEntity<List<Account>> findAccountsByOwnerFirstAndLastNames(
             @PathVariable("firstName") String firstName,
             @PathVariable("lastName") String lastName
     ) throws JsonProcessingException {
         
-        log.info("Endpoint hit successfully! Searching database for: " + firstName + " " + lastName);
-        return new ResponseEntity<List<Account>>(((AccountService) accountService).getByOwnerFirstAndLast(firstName, lastName), HttpStatus.OK);
+        log.info("Endpoint hit successfully! Searching database for accounts of: " + firstName + " " + lastName);
+        return new ResponseEntity<List<Account>>(accountService.getByOwnerFirstAndLast(firstName, lastName), HttpStatus.OK);
     }
-
-	/*
-	 * @GetMapping("/findByCustomer")
-	 * 
-	 * @ApiOperation(value = "Trouver des comptes par id du client")
-	 * 
-	 * @ApiResponses({
-	 * 
-	 * @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message =
-	 * SwaggerConstant.HTTP_CODE_OK_MESSAGE),
-	 * 
-	 * @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message =
-	 * SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE) }) public
-	 * ResponseEntity<List<Account>> AccountByCustomerId(@ApiParam(value =
-	 * "ID") @RequestParam(required = true) Long id) throws JsonProcessingException
-	 * { //log.info("Trouver un compte par ID du client  " + "ID"); return new
-	 * ResponseEntity<List<Account>>(((AccountService)
-	 * accountService).findByOwner(id), HttpStatus.OK); }
-	 */
     
     @PostMapping("/save")
     @ApiOperation(value = "Enregistrer le compte")
-    public ResponseEntity<String> SaveAccount(@RequestBody Account account) throws JsonProcessingException {
-        log.info("Saving new account for owner ID: " + 
-            (account.getOwner() != null ? account.getOwner().getID() : "Unknown"));
+    public ResponseEntity<String> saveAccount(@RequestBody Account account) throws JsonProcessingException {
+        log.info("Saving new " + account.getType() + " account for owner: " + 
+            (account.getOwner() != null ? (account.getOwner().getFirstName() + " " + account.getOwner().getLastName()) : "Unknown"));
         
         return new ResponseEntity<String>(accountService.saveAccount(account), HttpStatus.OK);
     }
@@ -149,9 +128,9 @@ public class AccountController {
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<String> DeleteAccount(@ApiParam(value = "Account") @RequestParam(required = true) Account a) throws JsonProcessingException {
-    	//log.info("Enregistrer le compte  " + a.getID());
-    	return new ResponseEntity<String>(((AccountService) accountService).deleteAccount(a), HttpStatus.OK);
+    public ResponseEntity<String> deleteAccount(@ApiParam(value = "Account") @RequestParam(required = true) Account a) throws JsonProcessingException {
+    	log.info("Effacer le compte  " + a.getID());
+    	return new ResponseEntity<String>(accountService.deleteAccount(a), HttpStatus.OK);
     }
     
     // Controller specific exception handler, not central like @ControllerAdvice
@@ -159,9 +138,5 @@ public class AccountController {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public String accountNotFoundExceptionHandler(AccountNotFoundException ex) {
         return ex.getMessage(); // example	
-    }
-    
-    public void print() {
-    	
     }
 }

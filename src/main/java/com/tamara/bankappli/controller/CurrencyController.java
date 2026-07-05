@@ -56,7 +56,7 @@ public class CurrencyController{
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<List<Currency>> CurrencyLookUp() throws JsonProcessingException {
+    public ResponseEntity<List<Currency>> currencyLookUp() throws JsonProcessingException {
     	log.info("Lister tous les comptes existantes dans CURRENCY");
     	return new ResponseEntity<List<Currency>>(currencyService.getAll(), HttpStatusCode.valueOf(200));
     }
@@ -67,9 +67,9 @@ public class CurrencyController{
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<Long> CountCurrencys() throws JsonProcessingException {
+    public ResponseEntity<Long> countCurrencys() throws JsonProcessingException {
     	log.info("Compter le nombre total des comptes");
-    	return new ResponseEntity<Long>(((CurrencyService) currencyService).countCurrencys(), HttpStatus.OK);
+    	return new ResponseEntity<Long>(currencyService.countCurrencys(), HttpStatus.OK);
     }
     
     @GetMapping("/{id}")
@@ -78,9 +78,9 @@ public class CurrencyController{
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<Currency> CurrencyByID(@ApiParam(value = "ID") @PathVariable("id") Long id) throws JsonProcessingException {
+    public ResponseEntity<Currency> currencyByID(@ApiParam(value = "ID") @PathVariable("id") Long id) throws JsonProcessingException {
     	log.info("Trouver une devise par ID " + "ID");
-    	return new ResponseEntity<Currency>(((CurrencyService) currencyService).getByID(id), HttpStatus.OK);
+    	return new ResponseEntity<Currency>(currencyService.getByID(id), HttpStatus.OK);
     }
     
     @GetMapping("/save")
@@ -89,9 +89,9 @@ public class CurrencyController{
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<String> SaveCurrency(@RequestBody Currency c) throws JsonProcessingException {
-    	//log.info("Enregistrer une devise  " + c.getID());
-    	return new ResponseEntity<String>(((CurrencyService) currencyService).saveCurrency(c), HttpStatus.OK);
+    public ResponseEntity<String> saveCurrency(@RequestBody Currency c) throws JsonProcessingException {
+    	log.info("Enregistrer une devise  " + c.getID());
+    	return new ResponseEntity<String>(currencyService.saveCurrency(c), HttpStatus.OK);
     }
     
     @GetMapping("/delete")
@@ -100,9 +100,9 @@ public class CurrencyController{
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<String> DeleteCurrency(@ApiParam(value = "currency") @RequestParam(required = true) Currency c) throws JsonProcessingException {
-    	//log.info("Enregistrer la devise  " + c.getID());
-    	return new ResponseEntity<String>(((CurrencyService) currencyService).deleteCurrency(c), HttpStatus.OK);
+    public ResponseEntity<String> deleteCurrency(@ApiParam(value = "currency") @RequestParam(required = true) Currency c) throws JsonProcessingException {
+    	log.info("Enregistrer la devise  " + c.getID());
+    	return new ResponseEntity<String>(currencyService.deleteCurrency(c), HttpStatus.OK);
     }
     
     public void print() {

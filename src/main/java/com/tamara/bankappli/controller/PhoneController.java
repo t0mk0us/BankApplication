@@ -59,7 +59,7 @@ public class PhoneController{
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<List<Phone>> PhoneLookUp() throws JsonProcessingException {
+    public ResponseEntity<List<Phone>> phoneLookUp() throws JsonProcessingException {
     	log.info("Lister tous les comptes existantes dans CURRENCY");
     	return new ResponseEntity<List<Phone>>(phoneService.getAll(), HttpStatusCode.valueOf(200));
     }
@@ -70,7 +70,7 @@ public class PhoneController{
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<Long> CountPhones() throws JsonProcessingException {
+    public ResponseEntity<Long> countPhones() throws JsonProcessingException {
     	log.info("Compter le nombre total des comptes");
     	return new ResponseEntity<Long>(((PhoneService) phoneService).countPhones(), HttpStatus.OK);
     }
@@ -81,7 +81,7 @@ public class PhoneController{
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<Phone> PhoneByID(@ApiParam(value = "ID") @PathVariable("id") Long id) throws JsonProcessingException {
+    public ResponseEntity<Phone> phoneByID(@ApiParam(value = "ID") @PathVariable("id") Long id) throws JsonProcessingException {
     	log.info("Trouver une devise par ID " + "ID");
     	return new ResponseEntity<Phone>(phoneService.getByID(id), HttpStatus.OK);
     }
@@ -92,7 +92,7 @@ public class PhoneController{
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<List<Phone>> PhoneByType(@ApiParam(value = "ID") @PathVariable("id") Long id) throws JsonProcessingException {
+    public ResponseEntity<List<Phone>> phoneByType(@ApiParam(value = "ID") @PathVariable("id") Long id) throws JsonProcessingException {
     	log.info("Trouver un d'investissement par type " + "ID");
     	return new ResponseEntity<List<Phone>>(phoneService.getByType(id), HttpStatus.OK);
     }
@@ -103,7 +103,7 @@ public class PhoneController{
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<String> SavePhone(@RequestBody Phone c) throws JsonProcessingException {
+    public ResponseEntity<String> savePhone(@RequestBody Phone c) throws JsonProcessingException {
     	//log.info("Enregistrer une devise  " + c.getID());
     	return new ResponseEntity<String>(phoneService.savePhone(c), HttpStatus.OK);
     }
@@ -114,7 +114,7 @@ public class PhoneController{
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<String> DeletePhone(@ApiParam(value = "phone") @RequestParam(required = true) Phone c) throws JsonProcessingException {
+    public ResponseEntity<String> deletePhone(@ApiParam(value = "phone") @RequestParam(required = true) Phone c) throws JsonProcessingException {
     	//log.info("Enregistrer la devise  " + c.getID());
     	return new ResponseEntity<String>(phoneService.deletePhone(c), HttpStatus.OK);
     }

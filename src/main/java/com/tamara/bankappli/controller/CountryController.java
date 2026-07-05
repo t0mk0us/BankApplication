@@ -57,7 +57,7 @@ public class CountryController{
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<List<Country>> CountryLookUp() throws JsonProcessingException {
+    public ResponseEntity<List<Country>> countryLookUp() throws JsonProcessingException {
     	log.info("Lister tous les comptes existantes dans CURRENCY");
     	return new ResponseEntity<List<Country>>(countryService.getAll(), HttpStatusCode.valueOf(200));
     }
@@ -68,9 +68,9 @@ public class CountryController{
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<Long> CountCountrys() throws JsonProcessingException {
+    public ResponseEntity<Long> countCountrys() throws JsonProcessingException {
     	log.info("Compter le nombre total des comptes");
-    	return new ResponseEntity<Long>(((CountryService) countryService).countCountries(), HttpStatus.OK);
+    	return new ResponseEntity<Long>(countryService.countCountries(), HttpStatus.OK);
     }
     
     @GetMapping("/{id}")
@@ -79,7 +79,7 @@ public class CountryController{
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<Country> CountryByID(@ApiParam(value = "ID") @PathVariable("id") Long id) throws JsonProcessingException {
+    public ResponseEntity<Country> countryByID(@ApiParam(value = "ID") @PathVariable("id") Long id) throws JsonProcessingException {
     	log.info("Trouver une devise par ID " + "ID");
     	return new ResponseEntity<Country>(countryService.getByID(id), HttpStatus.OK);
     }
@@ -87,7 +87,7 @@ public class CountryController{
     
     @PostMapping("/save")
     @ApiOperation(value = "Enregistrer le compte")
-    public ResponseEntity<String> SaveCountry(@RequestBody Country country) throws JsonProcessingException {
+    public ResponseEntity<String> saveCountry(@RequestBody Country country) throws JsonProcessingException {
         log.info("Saving new country: " + 
             country.getName());
         
@@ -100,7 +100,7 @@ public class CountryController{
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<String> DeleteCountry(@ApiParam(value = "country") @RequestParam(required = true) Country c) throws JsonProcessingException {
+    public ResponseEntity<String> deleteCountry(@ApiParam(value = "country") @RequestParam(required = true) Country c) throws JsonProcessingException {
     	//log.info("Enregistrer la devise  " + c.getID());
     	return new ResponseEntity<String>(countryService.deleteCountry(c), HttpStatus.OK);
     }
