@@ -7,7 +7,6 @@ import org.hibernate.type.SqlTypes;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.tamara.bankappli.enums.InvestmentType;
 import com.tamara.bankappli.enums.PhoneType;
 
 import jakarta.persistence.Column;
@@ -35,29 +34,38 @@ public class Phone  implements Serializable {
 	private Long ID;
 	
 	//@ManyToOne
-    @Column(name = "country_code")
-	private short country_code;
+    @Column(name = "country_code_id")
+	private Long country_code;
 	
-	@Column(name = "area_code")
-	private int area_code;
+	@Column(name = "area_code_id")
+	private Long area_code;
 	
 	@Column(name = "phone_number")
 	private Integer phone_number;
 	
-    @Enumerated(EnumType.ORDINAL)
 	@Column(name = "phone_type")
-	private PhoneType phoneType;
+	private short phone_type;
+	
+	//@ManyToOne
+	/*
+	 * @Enumerated(EnumType.STRING)
+	 * 
+	 * @JdbcTypeCode(SqlTypes.JSON)
+	 * 
+	 * @JoinColumn(name = "phone_type")
+	 */
+	//private PhoneType phone_type;
 	
 	public Phone() {
 		
 	}
 	
-	public Phone(short country_code, int area_code, Integer phone_number, PhoneType phone_type) {
+	public Phone(Long country_code, Long area_code, Integer phone_number, short phone_type) {
 		super();
 		this.country_code = country_code;
 		this.area_code = area_code;
 		this.phone_number = phone_number;
-		this.phoneType = phone_type;
+		this.phone_type = phone_type;
 	}
 	
 	public Long getID() {
@@ -70,22 +78,29 @@ public class Phone  implements Serializable {
 		ID = iD;
 	}
 
-	public short getCountry_code() {
+	/*
+	 * public PhoneType getPhoneType() { return phone_type; }
+	 * 
+	 * public void setPhoneType(PhoneType phoneType) { this.phone_type = phoneType;
+	 * }
+	 */
+
+	public Long getCountry_code() {
 		
 		return country_code;
 	}
 
-	public void setCountry_code(short country_code) {
+	public void setCountry_code(Long country_code) {
 		
 		this.country_code = country_code;
 	}
 
-	public int getArea_code() {
+	public Long getArea_code() {
 		
 		return area_code;
 	}
 
-	public void setArea_code(int area_code) {
+	public void setArea_code(Long area_code) {
 		
 		this.area_code = area_code;
 	}
@@ -100,11 +115,13 @@ public class Phone  implements Serializable {
 		this.phone_number = phone_number;
 	}
 
-	public PhoneType getPhoneType() {
-		return phoneType;
+	public short getPhone_type() {
+		return phone_type;
 	}
 
-	public void setPhoneType(PhoneType phone_type) {
-		this.phoneType = phone_type;
-	}	
+	public void setPhone_type(short phone_type) {
+		this.phone_type = phone_type;
+	}
+	
+	
 }

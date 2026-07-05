@@ -60,7 +60,7 @@ import com.tamara.bankappli.model.BankUser;
 	}	
 	
 	
-	@GetMapping("/bankapplication/hello") 
+	@GetMapping("/hello") 
 	@CrossOrigin(origins = "http://localhost:3015")
 		public String getHello()   
 	{  
@@ -73,81 +73,79 @@ import com.tamara.bankappli.model.BankUser;
         return "forward:/login.html"; // Routes directly to your custom templates/login.html view
     }
 	
-//	@GetMapping("/bankapplication/account/list")
-//	@CrossOrigin(origins = "http://localhost:3015")
-//		public List<Account> listAccounts() {
-//			
-//		return accountRepository.findAll();
-//		}
+	@GetMapping("/bankapplication/account/list")
+	@CrossOrigin(origins = "http://localhost:3015")
+		public List<Account> listAccounts() {
+			
+		return accountRepository.findAll();
+		}
 	
-//	@GetMapping("/bankapplication/account/count")
-//	@CrossOrigin(origins = "http://localhost:3015")
-//		public long countAccounts() {
-//			
-//		return accountRepository.count();
-//		}
+	@GetMapping("/bankapplication/account/count")
+	@CrossOrigin(origins = "http://localhost:3015")
+		public long countAccounts() {
+			
+		return accountRepository.count();
+		}
 	
-//	@GetMapping("/bankapplication/account/{id}")
-//	@CrossOrigin(origins = "http://localhost:3015")
-//	public Account findAccountById(@PathVariable Long id) { 
-//		System.out.println("Searching for accounts  with id " + id);
-//		  	return accountRepository.getReferenceById(id); 
-//	}
+	@GetMapping("/bankapplication/account/{id}")
+	@CrossOrigin(origins = "http://localhost:3015")
+	public Account findAccountById(@PathVariable Long id) { 
+		System.out.println("Searching for accounts  with id " + id);
+		  	return accountRepository.getReferenceById(id); 
+	}
 	
-//	@GetMapping("/bankapplication/account/by_owner/{ownerId}")  
-//	@CrossOrigin(origins = "http://localhost:3015")
-//		public List<Account> findAccountsByOwner (@PathVariable Long ownerId) {
-//			System.out.println("Searching for accounts of the person with id " + ownerId);
-//					
-//		return accountRepository.findByOwnerID(ownerId);
-//		}
+	@GetMapping("/bankapplication/account/by_owner/{ownerId}")  
+	@CrossOrigin(origins = "http://localhost:3015")
+		public List<Account> findAccountsByOwner (@PathVariable Long ownerId) {
+			System.out.println("Searching for accounts of the person with id " + ownerId);
+					
+		return accountRepository.findByOwnerID(ownerId);
+		}
 	
+	@GetMapping("/bankapplication/account/by_owner/{lastName}/{firstName}")  
+	@CrossOrigin(origins = "http://localhost:3015")
+		public List<Account> findAccountsByOwnerFirstNameAndLastNames (@PathVariable String firstName, @PathVariable String lastName) {
+			System.out.println("Searching for accounts of  " + firstName + " " + lastName);
+					
+		return accountRepository.findByOwnerFirstNameAndLastName(firstName, lastName);
+		}
+	
+	@GetMapping("/bankapplication/address/list")
+	@CrossOrigin(origins = "http://localhost:3015")
+		public List<Address> listAddresses() {
+			
+		return addressRepository.findAll();
+		}
+	
+	@GetMapping("/bankapplication/currency/list")
+	@CrossOrigin(origins = "http://localhost:3015")
+		public List<Currency> listCurrencies() {
+			
+		return currencyRepository.findAll();
+		}
+	
+	@GetMapping("/bankapplication/person/firstName/{firstName}/lastName/{lastName}")  
+	@CrossOrigin(origins = "http://localhost:3015")
+		public Person findPersonByFirstAndLast(@PathVariable String firstName, @PathVariable String lastName) {
+			System.out.println("Searching for " + firstName + " and " + lastName);
+					
+		return personRepository.findByFirstNameAndLastName(firstName, lastName);
+		}
+	
+	@GetMapping("/bankapplication/login/{userName}/{userPass}")
+	@CrossOrigin(origins = "http://localhost:3015")
+		public String LoginGetRequest(@PathVariable String userName, @PathVariable String userPass) {
+			
+		Optional<BankUser> u = userRepository.findByUserNameAndPassword(userName, userPass);
 		
-//	  @GetMapping("/bankapplication/account/by_owner/{firstName}/{lastName}")  
-//	  @CrossOrigin(origins = "http://localhost:3015") 
-//	  public List<Account> findAccountsByOwnerFirstNameAndLastNames (@PathVariable String firstName, @PathVariable String lastName) {
-//		  System.out.println("Searching for accounts of  " + firstName + " " + lastName);
-//	  
-//	  return accountRepository.findByOwnerFirstNameAndLastName(firstName, lastName); 
-//	  }
-		 
-	
-//	@GetMapping("/bankapplication/address/list")
-//	@CrossOrigin(origins = "http://localhost:3015")
-//		public List<Address> listAddresses() {
-//			
-//		return addressRepository.findAll();
-//		}
-//	
-//	@GetMapping("/bankapplication/currency/list")
-//	@CrossOrigin(origins = "http://localhost:3015")
-//		public List<Currency> listCurrencies() {
-//			
-//		return currencyRepository.findAll();
-//		}
-	
-//	@GetMapping("/bankapplication/person/{firstName}/{lastName}")  
-//	@CrossOrigin(origins = "http://localhost:3015")
-//		public Person findPersonByFirstAndLast(@PathVariable String firstName, @PathVariable String lastName) {
-//			System.out.println("Searching for " + firstName + " and " + lastName);
-//					
-//		return personRepository.findByFirstNameAndLastName(firstName, lastName);
-//		}
-//	
-//	@GetMapping("/bankapplication/login/{userName}/{userPass}")
-//	@CrossOrigin(origins = "http://localhost:3015")
-//		public String LoginGetRequest(@PathVariable String userName, @PathVariable String userPass) {
-//			
-//		Optional<BankUser> u = userRepository.findByUserNameAndPassword(userName, userPass);
-//		
-//		if (u != null) {
-//			
-//			System.out.println("Found User. Credentials are OK!");
-//			return "User " + userName + " logged successfully ";
-//			}
-//			else {
-//			
-//			return "Incorrect credentials for " + userName;
-//		}
-//	}
+		if (u != null) {
+			
+			System.out.println("Found User. Credentials are OK!");
+			return "User " + userName + " logged successfully ";
+			}
+			else {
+			
+			return "Incorrect credentials for " + userName;
+		}
+	}
 }

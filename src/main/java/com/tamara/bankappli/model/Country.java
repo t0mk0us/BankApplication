@@ -51,7 +51,7 @@ public class Country {
 	@JoinColumn(name = "continent_id")
 	private Continent continent;
 	
-	@Column(name = "country_code")
+	@Column(name = "country_code_id")
 	private short country_code;
 	
 	public Country() {

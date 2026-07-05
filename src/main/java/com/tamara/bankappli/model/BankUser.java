@@ -38,14 +38,6 @@ public class BankUser {
 	@Column(name = "password")
 	private String password;
 	
-    // Link authentication profiles to financial entity identities
-    @OneToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
-
-    // Getters and Setters
-    public Customer getCustomer() { return customer; }
-	
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "USER_ROLE", joinColumns = @JoinColumn(name = "userId"))
     @Column(name = "userRole", nullable = false)

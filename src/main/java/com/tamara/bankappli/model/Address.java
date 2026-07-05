@@ -11,8 +11,6 @@ import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -35,13 +33,13 @@ public class Address {
 	//private String name; 
 
 	@Column(name = "number")
-	private int number;
+	private String number;
 	
 	@Column(name = "street")
 	private String street;
 	
 	@Column(name = "appartment")
-	private int appartment;
+	private String appartment;
 	
 	@Column(name = "city")
 	private String city;
@@ -56,14 +54,14 @@ public class Address {
 	//Country will still exist, even a particular Address disappears
 	private Country countryId;
 	
-	@Column(name = "postal_code")
+	@Column(name = "postal_Code")
 	private String postalCode;
 	
 	public Address() {
 		
 	}
 	
-	public Address(int number, String street, int appartment, String city, String state_province,
+	public Address(String number, String street, String appartment, String city, String state_province,
 			Country countryId, String postalCode) {
 		super();
 		this.number = number;
@@ -89,10 +87,10 @@ public class Address {
 	public void setID(Long iD) {
 		ID = iD;
 	}
-	public int getNumber() {
+	public String getNumber() {
 		return number;
 	}
-	public void setNumber(int number) {
+	public void setNumber(String number) {
 		this.number = number;
 	}
 	public String getStreet() {
@@ -101,10 +99,10 @@ public class Address {
 	public void setStreet(String street) {
 		this.street = street;
 	}
-	public int getAppartment() {
+	public String getAppartment() {
 		return appartment;
 	}
-	public void setAppartment(int appartment) {
+	public void setAppartment(String appartment) {
 		this.appartment = appartment;
 	}
 	public String getCity() {

@@ -13,7 +13,7 @@ import com.tamara.bankappli.model.Company;
 @Component
 @Repository
 public interface CompanyRepository 
-	extends JpaRepository<Company, Long>{
+	extends JpaRepository<Company, Long>, JpaSpecificationExecutor<Company>{
 	
 	public Company findByCompanyName(String name);
 	
