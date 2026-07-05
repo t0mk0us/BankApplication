@@ -24,64 +24,30 @@ import jakarta.persistence.Table;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Component
 @Entity
-@Table(name = "APP_USER")
-public class User {
+@Table(name = "USER_ROLES")
+public class UserRole {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long ID;
 	
-	@Column(name = "name")  
-	private String name;
-	
-	@Column(name = "password")
-	private String password;
-	
-	@Column(name = "role")
-	private String role;
-		
-	public User() {
-		
+	@Column(name = "userRole")  
+	private String userRole;
+
+	public UserRole(String userRole) {
+		super();
+		this.userRole = userRole;
 	}
 
-	public User(Long iD, String name, String password, String role) {
+	public UserRole(Long iD, String userRole) {
 		super();
 		ID = iD;
-		this.name = name;
-		this.password = password;
-		this.role = role;
-	} 
-
-	public Long getID() {
-		return ID;
+		this.userRole = userRole;
 	}
 
-	public void setID(Long iD) {
-		ID = iD;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
+	public UserRole() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 }

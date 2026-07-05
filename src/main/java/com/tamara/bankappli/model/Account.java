@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -22,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 import com.tamara.bankappli.enums.AccountStatus;
 import com.tamara.bankappli.enums.AccountType;
+import com.tamara.bankappli.enums.InvestmentType;
 import com.tamara.bankappli.model.Customer;
 
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -31,30 +33,30 @@ import com.tamara.bankappli.model.Customer;
 public class Account {
 		 
 	@Id
-	@Type(name = "org.hibernate.type.TextType", value = String.class)
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long ID;
-	
+
 	@JsonManagedReference
 	@OneToOne
-    @JoinColumn(name = "customer_id")
-	//Aggregation has-a
-	//Customer exists independently of an account
-	//Even if a Customer closes particular account,
-	//He could still stay a customer
+	@JoinColumn(name = "customer_id")
 	private Customer owner;
-	
-	@OneToOne
+
+	@OneToOne // Removed @Enumerated
 	@JoinColumn(name = "currency_id")
 	private Currency currency;
 
 	@Column(name = "balance")
 	private Float balance;
-	
+
+	//@Enumerated(EnumType.ORDINAL)
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "account_type")
-	private AccountType type;
+	private AccountType accountType;
+	
+//    @ManyToOne
+//    @JoinColumn(name = "account_type") // Name of your foreign key column in the database
+//    private AccountType account_Type;
 	
 	@Column(name = "management_fee")
 	private Float fees;
@@ -82,7 +84,7 @@ public class Account {
 		this.owner = owner;
 		this.currency = currency;
 		this.balance = balance;
-		this.type = type;
+		this.accountType = type;
 		this.fees = fees;
 	}
 	
@@ -103,12 +105,12 @@ public class Account {
 	
 	public AccountType getType() {
 		
-		return type;
+		return accountType;
 	}
 	
 	public void setType(AccountType type) {
 		
-		this.type = type;
+		this.accountType = type;
 	}
 	
 	/*
@@ -180,10 +182,11 @@ public class Account {
 	public void setFees(Float fees) {
 		this.fees = fees;
 	}
-
+	
 	@Override
 	public int hashCode() {
-		return Objects.hash(ID, currency, type);
+		// Only use fields belonging directly to Account, or the owner object itself
+		return Objects.hash(ID, currency, balance, accountType);
 	}
 	
 	@Override
@@ -195,14 +198,18 @@ public class Account {
 		if (getClass() != obj.getClass())
 			return false;
 		Account other = (Account) obj;
-		return Objects.equals(ID, other.ID) && Objects.equals(currency, other.currency)
-				//&& Objects.equals(owner, other.owner)
-				&& Objects.equals(type, other.type);
+		return Objects.equals(ID, other.ID) 
+				&& Objects.equals(currency, other.currency)
+				&& Objects.equals(accountType, other.accountType)
+				&& Objects.equals(owner, other.owner); // Safe null-checking handled by Objects.equals
 	}
 	
 	@Override
 	public String toString() {
-		return "Account [ID=" + ID + ", + type =" + type + ", currency="
-				+ currency + "]";
-		}
+		// Guard against a null owner to prevent crashes during logging
+		String ownerName = (owner != null) ? (owner.getFirstName() + " " + owner.getLastName()) : "None";
+		
+		return "Account [ID=" + ID + ", Owner = " + ownerName + ", currency="
+				+ (currency != null ? currency.toString() : "None") + ", Balance = " + balance + "]";
+	}
 }

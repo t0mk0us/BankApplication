@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -30,6 +32,7 @@ import io.swagger.annotations.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3015")
 @RequestMapping(value = CurrencyController.CONTEXT_V1_Currency)
 //@Api(tags = { SwaggerConstant.TAG_CURRENCY_NAME })
 @Slf4j
@@ -37,27 +40,28 @@ public class CurrencyController{
 	
 	//public static final String CONTEXT_1 = "http://design4logic/apps/bankapplication"; 
 	
-	public static final String CONTEXT_1 = "http:/localhost:8080/bankapplication/"; 
+	public static final String CONTEXT_1 = "/bankapplication/"; 
 	public static final String CONTEXT_V1_Currency = CONTEXT_1 + "currency";
-
-	@Autowired
-	CurrencyService currencyService;
-	@Qualifier("currencyService")
+	
+    private final CurrencyService currencyService;
+	
+    @Autowired
+    public CurrencyController(CurrencyService currencyService) {
+        this.currencyService = currencyService;
+    }
 
     @GetMapping("/list")
-	@CrossOrigin(origins = "http://localhost:3015")
     @ApiOperation(value = "Lister les devises")
     @ApiResponses({
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<List<Currency>> CurrencyLookUp(@ApiParam(name = "table", value = "nomTableLookup") @RequestParam(required = true) String nomTableLookup) throws JsonProcessingException {
-    	log.info("Lister tous les comptes existantes dans " + nomTableLookup);
+    public ResponseEntity<List<Currency>> CurrencyLookUp() throws JsonProcessingException {
+    	log.info("Lister tous les comptes existantes dans CURRENCY");
     	return new ResponseEntity<List<Currency>>(currencyService.getAll(), HttpStatusCode.valueOf(200));
     }
 	
     @GetMapping("/count")
-    @CrossOrigin(origins = "http://localhost:3015")
     @ApiOperation(value = "Compter le nombre des devises")
     @ApiResponses({
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
@@ -68,51 +72,29 @@ public class CurrencyController{
     	return new ResponseEntity<Long>(((CurrencyService) currencyService).countCurrencys(), HttpStatus.OK);
     }
     
-    @GetMapping("/find/{id}")
-    @CrossOrigin(origins = "http://localhost:3015")
+    @GetMapping("/{id}")
     @ApiOperation(value = "Trouver une devise par id")
     @ApiResponses({
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<Currency> CurrencyByID(@ApiParam(value = "ID") @RequestParam(required = true) Long id) throws JsonProcessingException {
+    public ResponseEntity<Currency> CurrencyByID(@ApiParam(value = "ID") @PathVariable("id") Long id) throws JsonProcessingException {
     	log.info("Trouver une devise par ID " + "ID");
     	return new ResponseEntity<Currency>(((CurrencyService) currencyService).getByID(id), HttpStatus.OK);
     }
     
-	/*
-	 * @GetMapping("/findByCustomer")
-	 * 
-	 * @ApiOperation(value = "Trouver des comptes par id du client")
-	 * 
-	 * @ApiResponses({
-	 * 
-	 * @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message =
-	 * SwaggerConstant.HTTP_CODE_OK_MESSAGE),
-	 * 
-	 * @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message =
-	 * SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE) }) public
-	 * ResponseEntity<List<Currency>> CurrencyByCustomerId(@ApiParam(value =
-	 * "ID") @RequestParam(required = true) Long id) throws JsonProcessingException
-	 * { //log.info("Trouver un compte par ID du client  " + "ID"); return new
-	 * ResponseEntity<List<Currency>>(((CurrencyService)
-	 * CurrencyService).findByOwner(id), HttpStatus.OK); }
-	 */
-    
     @GetMapping("/save")
-    @CrossOrigin(origins = "http://localhost:3015")
     @ApiOperation(value = "Enregistrer une devise")
     @ApiResponses({
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<String> SaveCurrency(@ApiParam(value = "currency") @RequestParam(required = true) Currency c) throws JsonProcessingException {
+    public ResponseEntity<String> SaveCurrency(@RequestBody Currency c) throws JsonProcessingException {
     	//log.info("Enregistrer une devise  " + c.getID());
     	return new ResponseEntity<String>(((CurrencyService) currencyService).saveCurrency(c), HttpStatus.OK);
     }
     
     @GetMapping("/delete")
-    @CrossOrigin(origins = "http://localhost:3015")
     @ApiOperation(value = "Effacer une devise")
     @ApiResponses({
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
@@ -126,5 +108,4 @@ public class CurrencyController{
     public void print() {
     	
     }
-
 }

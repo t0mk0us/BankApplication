@@ -11,6 +11,8 @@ import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -26,20 +28,20 @@ import jakarta.persistence.Table;
 public class Address {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long ID;
 	
 	//private String name; 
 
 	@Column(name = "number")
-	private String number;
+	private int number;
 	
 	@Column(name = "street")
 	private String street;
 	
 	@Column(name = "appartment")
-	private String appartment;
+	private int appartment;
 	
 	@Column(name = "city")
 	private String city;
@@ -54,14 +56,14 @@ public class Address {
 	//Country will still exist, even a particular Address disappears
 	private Country countryId;
 	
-	@Column(name = "postal_Code")
+	@Column(name = "postal_code")
 	private String postalCode;
 	
 	public Address() {
 		
 	}
 	
-	public Address(String number, String street, String appartment, String city, String state_province,
+	public Address(int number, String street, int appartment, String city, String state_province,
 			Country countryId, String postalCode) {
 		super();
 		this.number = number;
@@ -87,10 +89,10 @@ public class Address {
 	public void setID(Long iD) {
 		ID = iD;
 	}
-	public String getNumber() {
+	public int getNumber() {
 		return number;
 	}
-	public void setNumber(String number) {
+	public void setNumber(int number) {
 		this.number = number;
 	}
 	public String getStreet() {
@@ -99,10 +101,10 @@ public class Address {
 	public void setStreet(String street) {
 		this.street = street;
 	}
-	public String getAppartment() {
+	public int getAppartment() {
 		return appartment;
 	}
-	public void setAppartment(String appartment) {
+	public void setAppartment(int appartment) {
 		this.appartment = appartment;
 	}
 	public String getCity() {

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.tamara.bankappli.model.Company;
 import com.tamara.bankappli.model.Country;
 import com.tamara.bankappli.model.Currency;
 import com.tamara.bankappli.repository.CompanyRepository;
@@ -43,18 +44,17 @@ public class CountryService {
 		return countryRepo.getReferenceById(id);	
 	}
 	
-	public Country saveCountry(Country c) {
+	public String saveCountry(Country c) {
 		
-		return countryRepo.save(c);
+		Long newCntrId = countryRepo.save(c).getID();
+        return "New country was successfully saved with ID = " + newCntrId;
 	}
 	
-	public void deleteCountry(Country c) {
-		
-		countryRepo.delete(c);
-		
-		return;
-	}
-	
+    public String deleteCountry(Country c) {
+    	countryRepo.delete(c);
+        return "Account with ID was successfully deleted = " + c.getID();
+    }
+    
 	public long countCountries() {
 		
 		return countryRepo.count();
@@ -66,19 +66,5 @@ public class CountryService {
 		
 		return country.getCurrency();
 	}
-	
-/*	public void addCurrency(Long id, Currency c) {
-		
-		Country country = getByID(id); 
-		
-		List<Currency> currencies = country.getCurrencies();
-		
-		currencies.add(c);
-		
-		//country.setCurrencies(currencies);
-		
-		countryRepo.save(country);
-	}
-	*/
 }
 
