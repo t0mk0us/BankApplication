@@ -3,8 +3,6 @@ package com.tamara.bankappli.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -20,13 +18,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-
 import com.tamara.bankappli.enums.SwaggerConstant;
 import com.tamara.bankappli.exception.AccountNotFoundException;
 import com.tamara.bankappli.model.Account;
-import com.tamara.bankappli.model.Address;
 import com.tamara.bankappli.service.AccountService;
-import com.tamara.bankappli.service.AddressService;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
