@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ import org.springframework.http.HttpStatusCode;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.tamara.bankappli.enums.SwaggerConstant;
+import com.tamara.bankappli.model.Person;
 import com.tamara.bankappli.model.Person;
 import com.tamara.bankappli.service.PersonService;
 import com.tamara.bankappli.service.PersonService;
@@ -46,21 +48,20 @@ public class PersonController {
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })  
-    public ResponseEntity<List<Person>> PersonLookUp() throws JsonProcessingException {
+    public ResponseEntity<List<Person>> personLookUp() throws JsonProcessingException {
     	log.info("Lister les personnes de PERSON");
     	return new ResponseEntity<List<Person>>(personService.getAll(), HttpStatusCode.valueOf(200));
     }
 	
     @GetMapping("/count")
-    //@CrossOrigin(origins = "http://localhost:3015")
     @ApiOperation(value = "Compter le nombre des comptes")
     @ApiResponses({
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<Long> CountPersons() throws JsonProcessingException {
+    public ResponseEntity<Long> countPersons() throws JsonProcessingException {
     	log.info("Compter le nombre total des comptes");
-    	return new ResponseEntity<Long>(((PersonService) personService).countPersons(), HttpStatus.OK);
+    	return new ResponseEntity<Long>(personService.countPersons(), HttpStatus.OK);
     }
     
     @GetMapping("/firstName/{firstName}/lastName/{lastName}")   
@@ -68,12 +69,34 @@ public class PersonController {
         @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
         @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     }) 
-	public ResponseEntity<Person> PersonByFirstAndLast(@ApiParam(name = "table", value = "nomTableLookup") @RequestParam(required = true) String nomTableLookup, 
+	public ResponseEntity<Person> personByFirstAndLast(@ApiParam(name = "table", value = "nomTableLookup") @RequestParam(required = true) String nomTableLookup, 
 			@ApiParam(name = "column", value = "firstName") @RequestParam(required = true) String firstName,
 			@ApiParam(name = "column", value = "lastName") @RequestParam(required = true) String lastName) throws JsonProcessingException {
     	
 		log.info("Trouver une personne par prenom et nom dans " + nomTableLookup);
 		return new ResponseEntity<Person>(personService.getByFirstAndLast(firstName, lastName), HttpStatusCode.valueOf(200));
 	}
+    
+    @GetMapping("/save")
+    @ApiOperation(value = "Enregistrer une personne")
+    @ApiResponses({
+            @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
+            @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
+    })
+    public ResponseEntity<String> savePerson(@RequestBody Person c) throws JsonProcessingException {
+    	//log.info("Enregistrer une devise  " + c.getID());
+    	return new ResponseEntity<String>(personService.savePerson(c), HttpStatus.OK);
+    }
+    
+    @GetMapping("/delete")
+    @ApiOperation(value = "Effacer une personne")
+    @ApiResponses({
+            @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
+            @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
+    })
+    public ResponseEntity<String> deletePerson(@ApiParam(value = "person") @RequestParam(required = true) Person c) throws JsonProcessingException {
+    	//log.info("Enregistrer la devise  " + c.getID());
+    	return new ResponseEntity<String>(personService.deletePerson(c), HttpStatus.OK);
+    }
 }
 

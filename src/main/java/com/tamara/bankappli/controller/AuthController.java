@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 	
 	public static final String CONTEXT_1 = "/bankapplication/"; 
-	//public static final String CONTEXT_V1_Auth = CONTEXT_1 + "auth";
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {

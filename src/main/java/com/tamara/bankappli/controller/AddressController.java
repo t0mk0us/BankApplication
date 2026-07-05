@@ -54,7 +54,7 @@ public class AddressController {
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<List<Address>> AddressLookUp() throws JsonProcessingException {
+    public ResponseEntity<List<Address>> addressLookUp() throws JsonProcessingException {
     	log.info("Lister les adresses de ADDRESS");
     	return new ResponseEntity<List<Address>>(addressService.getAll(), HttpStatusCode.valueOf(200));
     }
@@ -65,20 +65,19 @@ public class AddressController {
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<Long> countAddressES() throws JsonProcessingException {
+    public ResponseEntity<Long> countAddresses() throws JsonProcessingException {
     	log.info("Compter le nombre total des adresses");
-    	return new ResponseEntity<Long>(((AddressService) addressService).countAddress(), HttpStatus.OK);
+    	return new ResponseEntity<Long>(addressService.countAddress(), HttpStatus.OK);
     }
     
     @GetMapping("/{id}")
-    //@CrossOrigin(origins = "http://localhost:3015", allowCredentials = "true")
-    @ApiOperation(value = "Trouver un compte par id")
+    @ApiOperation(value = "Trouver une addresse par id")
     @ApiResponses({
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<Address> AddressByID(@ApiParam(value = "id") @PathVariable("id") Long id) throws JsonProcessingException, AddressNotFoundException {
-    	log.info("Trouver un compte par ID " + id);
-    	return new ResponseEntity<Address>(((AddressService) addressService).getByID(id), HttpStatus.OK);
+    public ResponseEntity<Address> addressByID(@ApiParam(value = "id") @PathVariable("id") Long id) throws JsonProcessingException, AddressNotFoundException {
+    	log.info("Trouver une adresse par ID " + id);
+    	return new ResponseEntity<Address>(addressService.getByID(id), HttpStatus.OK);
     }
 }

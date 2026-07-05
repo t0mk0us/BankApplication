@@ -56,42 +56,42 @@ public class CompanyController{
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<List<Company>> CompanyLookUp() throws JsonProcessingException {
+    public ResponseEntity<List<Company>> companyLookUp() throws JsonProcessingException {
     	log.info("Lister tous les comptes existantes dans CURRENCY");
     	return new ResponseEntity<List<Company>>(companyService.getAll(), HttpStatusCode.valueOf(200));
     }
 	
     @GetMapping("/count")
-    @ApiOperation(value = "Compter le nombre des devises")
+    @ApiOperation(value = "Compter le nombre des companies")
     @ApiResponses({
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<Long> CountCompanys() throws JsonProcessingException {
+    public ResponseEntity<Long> countCompanies() throws JsonProcessingException {
     	log.info("Compter le nombre total des comptes");
-    	return new ResponseEntity<Long>(((CompanyService) companyService).countCompanies(), HttpStatus.OK);
+    	return new ResponseEntity<Long>(companyService.countCompanies(), HttpStatus.OK);
     }
     
     @GetMapping("/{id}")
-    @ApiOperation(value = "Trouver une devise par id")
+    @ApiOperation(value = "Trouver une companie par id")
     @ApiResponses({
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<Company> CompanyByID(@ApiParam(value = "ID") @PathVariable("id") Long id) throws JsonProcessingException {
+    public ResponseEntity<Company> companyByID(@ApiParam(value = "ID") @PathVariable("id") Long id) throws JsonProcessingException {
     	log.info("Trouver une devise par ID " + "ID");
-    	return new ResponseEntity<Company>(((CompanyService) companyService).getByID(id), HttpStatus.OK);
+    	return new ResponseEntity<Company>(companyService.getByID(id), HttpStatus.OK);
     }
     
     @GetMapping("/save")
-    @ApiOperation(value = "Enregistrer une devise")
+    @ApiOperation(value = "Enregistrer une companie")
     @ApiResponses({
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<String> SaveCompany(@RequestBody Company c) throws JsonProcessingException {
-    	//log.info("Enregistrer une devise  " + c.getID());
-    	return new ResponseEntity<String>(((CompanyService) companyService).saveCompany(c), HttpStatus.OK);
+    public ResponseEntity<String> saveCompany(@RequestBody Company c) throws JsonProcessingException {
+    	log.info("Enregistrer une companie  " + c.getCompanyName());
+    	return new ResponseEntity<String>(companyService.saveCompany(c), HttpStatus.OK);
     }
     
     @GetMapping("/delete")
@@ -100,9 +100,9 @@ public class CompanyController{
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<String> DeleteCompany(@ApiParam(value = "company") @RequestParam(required = true) Company c) throws JsonProcessingException {
-    	//log.info("Enregistrer la devise  " + c.getID());
-    	return new ResponseEntity<String>(((CompanyService) companyService).deleteCompany(c), HttpStatus.OK);
+    public ResponseEntity<String> deleteCompany(@ApiParam(value = "company") @RequestParam(required = true) Company c) throws JsonProcessingException {
+    	log.info("Supprimer la devise  " + c.getCompanyName());
+    	return new ResponseEntity<String>(companyService.deleteCompany(c), HttpStatus.OK);
     }
     
     public void print() {

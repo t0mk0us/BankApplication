@@ -28,7 +28,7 @@ import lombok.extern.slf4j.Slf4j;
 public class BankUserController {
 	
 	//public static final String CONTEXT_1 = "http://design4logic/apps/bankapplication"; 
-	public static final String CONTEXT_1 = "http:/localhost:8080/bankapplication/"; 
+	public static final String CONTEXT_1 = "/bankapplication/"; 
 	
 	public static final String CONTEXT_V1_USER = CONTEXT_1 + "user";
 
@@ -44,8 +44,8 @@ public class BankUserController {
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })  
-    public ResponseEntity<List<BankUser>> PersonLookUp(@ApiParam(name = "table", value = "nomTableLookup") @RequestParam(required = true) String nomTableLookup) throws JsonProcessingException {
-    	log.info("Lister les utilisateurs de " + nomTableLookup);
+    public ResponseEntity<List<BankUser>> usersLookUp() throws JsonProcessingException {
+    	log.info("Lister les utilisateurs de l'appli BankApplication");
     	return new ResponseEntity<List<BankUser>>(userService.getAll(), HttpStatusCode.valueOf(200));
     }
     
