@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,10 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import com.tamara.bankappli.enums.SwaggerConstant;
-import com.tamara.bankappli.model.Account;
-import com.tamara.bankappli.model.Currency;
-import com.tamara.bankappli.service.AccountService;
-import com.tamara.bankappli.service.CurrencyService;
+import com.tamara.bankappli.model.Country;
+import com.tamara.bankappli.model.Country;
+import com.tamara.bankappli.service.CountryService;
+import com.tamara.bankappli.service.CountryService;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -33,21 +34,21 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3015")
-@RequestMapping(value = CurrencyController.CONTEXT_V1_Currency)
+@RequestMapping(value = CountryController.CONTEXT_V1_Country)
 //@Api(tags = { SwaggerConstant.TAG_CURRENCY_NAME })
 @Slf4j
-public class CurrencyController{
+public class CountryController{
 	
 	//public static final String CONTEXT_1 = "http://design4logic/apps/bankapplication"; 
 	
 	public static final String CONTEXT_1 = "/bankapplication/"; 
-	public static final String CONTEXT_V1_Currency = CONTEXT_1 + "currency";
+	public static final String CONTEXT_V1_Country = CONTEXT_1 + "country";
 	
-    private final CurrencyService currencyService;
+    private final CountryService countryService;
 	
     @Autowired
-    public CurrencyController(CurrencyService currencyService) {
-        this.currencyService = currencyService;
+    public CountryController(CountryService countryService) {
+        this.countryService = countryService;
     }
 
     @GetMapping("/list")
@@ -56,9 +57,9 @@ public class CurrencyController{
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<List<Currency>> CurrencyLookUp() throws JsonProcessingException {
+    public ResponseEntity<List<Country>> CountryLookUp() throws JsonProcessingException {
     	log.info("Lister tous les comptes existantes dans CURRENCY");
-    	return new ResponseEntity<List<Currency>>(currencyService.getAll(), HttpStatusCode.valueOf(200));
+    	return new ResponseEntity<List<Country>>(countryService.getAll(), HttpStatusCode.valueOf(200));
     }
 	
     @GetMapping("/count")
@@ -67,9 +68,9 @@ public class CurrencyController{
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<Long> CountCurrencys() throws JsonProcessingException {
+    public ResponseEntity<Long> CountCountrys() throws JsonProcessingException {
     	log.info("Compter le nombre total des comptes");
-    	return new ResponseEntity<Long>(((CurrencyService) currencyService).countCurrencys(), HttpStatus.OK);
+    	return new ResponseEntity<Long>(((CountryService) countryService).countCountries(), HttpStatus.OK);
     }
     
     @GetMapping("/{id}")
@@ -78,20 +79,19 @@ public class CurrencyController{
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<Currency> CurrencyByID(@ApiParam(value = "ID") @PathVariable("id") Long id) throws JsonProcessingException {
+    public ResponseEntity<Country> CountryByID(@ApiParam(value = "ID") @PathVariable("id") Long id) throws JsonProcessingException {
     	log.info("Trouver une devise par ID " + "ID");
-    	return new ResponseEntity<Currency>(((CurrencyService) currencyService).getByID(id), HttpStatus.OK);
+    	return new ResponseEntity<Country>(countryService.getByID(id), HttpStatus.OK);
     }
+
     
-    @GetMapping("/save")
-    @ApiOperation(value = "Enregistrer une devise")
-    @ApiResponses({
-            @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
-            @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
-    })
-    public ResponseEntity<String> SaveCurrency(@RequestBody Currency c) throws JsonProcessingException {
-    	//log.info("Enregistrer une devise  " + c.getID());
-    	return new ResponseEntity<String>(((CurrencyService) currencyService).saveCurrency(c), HttpStatus.OK);
+    @PostMapping("/save")
+    @ApiOperation(value = "Enregistrer le compte")
+    public ResponseEntity<String> SaveCountry(@RequestBody Country country) throws JsonProcessingException {
+        log.info("Saving new country: " + 
+            country.getName());
+        
+        return new ResponseEntity<String>(countryService.saveCountry(country), HttpStatus.OK);
     }
     
     @GetMapping("/delete")
@@ -100,9 +100,9 @@ public class CurrencyController{
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<String> DeleteCurrency(@ApiParam(value = "currency") @RequestParam(required = true) Currency c) throws JsonProcessingException {
+    public ResponseEntity<String> DeleteCountry(@ApiParam(value = "country") @RequestParam(required = true) Country c) throws JsonProcessingException {
     	//log.info("Enregistrer la devise  " + c.getID());
-    	return new ResponseEntity<String>(((CurrencyService) currencyService).deleteCurrency(c), HttpStatus.OK);
+    	return new ResponseEntity<String>(countryService.deleteCountry(c), HttpStatus.OK);
     }
     
     public void print() {

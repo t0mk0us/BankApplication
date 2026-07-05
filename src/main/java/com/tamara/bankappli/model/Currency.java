@@ -21,7 +21,6 @@ import jakarta.persistence.Table;
 public class Currency {
 
 	@Id
-	@Type(name = "org.hibernate.type.TextType", value = String.class)
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long ID;

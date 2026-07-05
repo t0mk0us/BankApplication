@@ -21,9 +21,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import com.tamara.bankappli.enums.SwaggerConstant;
 import com.tamara.bankappli.model.Account;
-import com.tamara.bankappli.model.Currency;
+import com.tamara.bankappli.model.Investment;
 import com.tamara.bankappli.service.AccountService;
-import com.tamara.bankappli.service.CurrencyService;
+import com.tamara.bankappli.service.InvestmentService;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -33,21 +33,21 @@ import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3015")
-@RequestMapping(value = CurrencyController.CONTEXT_V1_Currency)
+@RequestMapping(value = InvestmentController.CONTEXT_V1_Investment)
 //@Api(tags = { SwaggerConstant.TAG_CURRENCY_NAME })
 @Slf4j
-public class CurrencyController{
+public class InvestmentController{
 	
 	//public static final String CONTEXT_1 = "http://design4logic/apps/bankapplication"; 
 	
 	public static final String CONTEXT_1 = "/bankapplication/"; 
-	public static final String CONTEXT_V1_Currency = CONTEXT_1 + "currency";
+	public static final String CONTEXT_V1_Investment = CONTEXT_1 + "investment";
 	
-    private final CurrencyService currencyService;
+    private final InvestmentService investmentService;
 	
     @Autowired
-    public CurrencyController(CurrencyService currencyService) {
-        this.currencyService = currencyService;
+    public InvestmentController(InvestmentService investmentService) {
+        this.investmentService = investmentService;
     }
 
     @GetMapping("/list")
@@ -56,9 +56,9 @@ public class CurrencyController{
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<List<Currency>> CurrencyLookUp() throws JsonProcessingException {
+    public ResponseEntity<List<Investment>> InvestmentLookUp() throws JsonProcessingException {
     	log.info("Lister tous les comptes existantes dans CURRENCY");
-    	return new ResponseEntity<List<Currency>>(currencyService.getAll(), HttpStatusCode.valueOf(200));
+    	return new ResponseEntity<List<Investment>>(investmentService.getAll(), HttpStatusCode.valueOf(200));
     }
 	
     @GetMapping("/count")
@@ -67,9 +67,9 @@ public class CurrencyController{
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<Long> CountCurrencys() throws JsonProcessingException {
+    public ResponseEntity<Long> CountInvestments() throws JsonProcessingException {
     	log.info("Compter le nombre total des comptes");
-    	return new ResponseEntity<Long>(((CurrencyService) currencyService).countCurrencys(), HttpStatus.OK);
+    	return new ResponseEntity<Long>(((InvestmentService) investmentService).countInvestments(), HttpStatus.OK);
     }
     
     @GetMapping("/{id}")
@@ -78,9 +78,20 @@ public class CurrencyController{
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<Currency> CurrencyByID(@ApiParam(value = "ID") @PathVariable("id") Long id) throws JsonProcessingException {
+    public ResponseEntity<Investment> InvestmentByID(@ApiParam(value = "ID") @PathVariable("id") Long id) throws JsonProcessingException {
     	log.info("Trouver une devise par ID " + "ID");
-    	return new ResponseEntity<Currency>(((CurrencyService) currencyService).getByID(id), HttpStatus.OK);
+    	return new ResponseEntity<Investment>(investmentService.getByID(id), HttpStatus.OK);
+    }
+    
+    @GetMapping("/type/{id}")
+    @ApiOperation(value = "Trouver un d'investissement par type")
+    @ApiResponses({
+            @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
+            @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
+    })
+    public ResponseEntity<List<Investment>> InvestmentByType(@ApiParam(value = "ID") @PathVariable("id") Long id) throws JsonProcessingException {
+    	log.info("Trouver un d'investissement par type " + "ID");
+    	return new ResponseEntity<List<Investment>>(investmentService.getByType(id), HttpStatus.OK);
     }
     
     @GetMapping("/save")
@@ -89,9 +100,9 @@ public class CurrencyController{
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<String> SaveCurrency(@RequestBody Currency c) throws JsonProcessingException {
+    public ResponseEntity<String> SaveInvestment(@RequestBody Investment c) throws JsonProcessingException {
     	//log.info("Enregistrer une devise  " + c.getID());
-    	return new ResponseEntity<String>(((CurrencyService) currencyService).saveCurrency(c), HttpStatus.OK);
+    	return new ResponseEntity<String>( investmentService.saveInvestment(c), HttpStatus.OK);
     }
     
     @GetMapping("/delete")
@@ -100,9 +111,9 @@ public class CurrencyController{
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_OK, message = SwaggerConstant.HTTP_CODE_OK_MESSAGE),
             @ApiResponse(code = SwaggerConstant.HTTP_CODE_UNAUTHORIZED, message = SwaggerConstant.HTTP_CODE_UNAUTHORIZED_MESSAGE)
     })
-    public ResponseEntity<String> DeleteCurrency(@ApiParam(value = "currency") @RequestParam(required = true) Currency c) throws JsonProcessingException {
+    public ResponseEntity<String> DeleteInvestment(@ApiParam(value = "investment") @RequestParam(required = true) Investment c) throws JsonProcessingException {
     	//log.info("Enregistrer la devise  " + c.getID());
-    	return new ResponseEntity<String>(((CurrencyService) currencyService).deleteCurrency(c), HttpStatus.OK);
+    	return new ResponseEntity<String>(((InvestmentService) investmentService).deleteInvestment(c), HttpStatus.OK);
     }
     
     public void print() {

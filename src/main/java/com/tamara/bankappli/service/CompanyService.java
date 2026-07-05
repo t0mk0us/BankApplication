@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+import com.tamara.bankappli.model.Account;
 import com.tamara.bankappli.model.Company;
 import com.tamara.bankappli.repository.CompanyRepository;
 
@@ -34,36 +35,20 @@ public class CompanyService {
 		return companyRepo.getReferenceById(id);	
 	}
 	
-	public Company saveCompany(Company c) {
+	public String saveCompany(Company c) {
 		
-		return companyRepo.save(c);
+		Long newCntrId = companyRepo.save(c).getID();
+        return "New country was successfully saved with ID = " + newCntrId;
 	}
 	
-	public void deleteCompany(Company c) {
+    public String deleteCompany(Company c) {
+    	companyRepo.delete(c);
+        return "Account with ID was successfully deleted = " + c.getID();
+    }
 		
-		companyRepo.delete(c);
-		
-		return;
-	}
-	
 	public long countCompanies() {
 		
 		return companyRepo.count();
 	}
-	
-	
-/*	public void addCurrency(Long id, Currency c) {
-		
-		Company company = getByID(id); 
-		
-		List<Currency> currencies = company.getCurrencies();
-		
-		currencies.add(c);
-		
-		//company.setCurrencies(currencies);
-		
-		companyRepo.save(company);
-	}
-	*/
 }
 
