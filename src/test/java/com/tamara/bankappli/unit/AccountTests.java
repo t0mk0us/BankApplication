@@ -1,4 +1,4 @@
-package com.tamara.bankAppli.unit;
+package com.tamara.bankappli.unit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertThrows;

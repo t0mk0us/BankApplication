@@ -1,4 +1,4 @@
-package com.tamara.bankAppli.integration.controller;
+package com.tamara.bankappli.integration.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -30,7 +30,7 @@ import jakarta.servlet.ServletContext;
 
 @ExtendWith(SpringExtension.class)
 @WebAppConfiguration
-public class CustomerControllerIT {
+public class AddressControllerIT {
 
 	@Autowired
 	private WebApplicationContext webApplicationContext;

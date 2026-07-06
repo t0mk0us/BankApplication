@@ -1,4 +1,4 @@
-package com.tamara.bankAppli.unit;
+package com.tamara.bankappli.unit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -9,9 +9,10 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.assertj.MockMvcTester;
 
 import com.tamara.bankappli.controller.AccountController;
+import com.tamara.bankappli.model.Person;
 
-@WebMvcTest(AccountController.class)
-public	class CompanyTests {
+@WebMvcTest(Person.class)
+public	class PersonTests {
 
 	@Autowired
 	private MockMvcTester mvc;

@@ -2,25 +2,25 @@ package com.tamara.bankappli.enums;
 
 public enum AccountStatus {
 
-	OPEN(1L, "1"),
-	CLOSED(2L, "2"),
-	DEBT_RECOVERY(3L, "3"), 
-	UNKNOWN(4L, "4");
+	OPEN((short) 1, "Open"),
+	CLOSED((short) 2, "Closed"),
+	DEBT_RECOVERY((short) 3, "In debt recovery"), 
+	UNKNOWN((short) 4, "Unknown status");
 	
 	public final java.lang.String name;
 
-    public final java.lang.Long id;
+    public final Short id;
 
-    AccountStatus(Long id, java.lang.String name) {
+    AccountStatus(Short i, java.lang.String name) {
         this.name = name;
-        this.id = id;
+        this.id = i;
     }
 
     public java.lang.String getName() {
         return name;
     }
 
-    public java.lang.Long getId() {
+    public Short getId() {
         return id;
     }
 	

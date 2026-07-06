@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 
 public enum AccountType {
 	
-	CHECKING {
+	CHECKING((short) 1, "Chequing") {
 		
         @Override
         public boolean isChecking() {
@@ -26,8 +26,7 @@ public enum AccountType {
     		return this.name();
     	}
 	},
-	
-	SAVING {
+	SAVING((short) 2, "Saving") {
 		
         @Override
         public boolean isSaving() {
@@ -44,8 +43,7 @@ public enum AccountType {
     		return this.name();
     	}
 	},
-	
-	RRSP {
+	RRSP((short) 3, "RRSP") {
 		
         @Override
         public boolean isRRSP() {
@@ -61,9 +59,8 @@ public enum AccountType {
     		// TODO Auto-generated method stub
     		return this.name();
     	}
-	},
-	
-	REEE {
+	}, 
+	REEE((short) 4, "REEE") {
 		
         @Override
         public boolean isREEE() {
@@ -79,9 +76,8 @@ public enum AccountType {
     		// TODO Auto-generated method stub
     		return this.name();
     	}
-	},
-	
-	MORTGAGE {
+	}, 
+	MORTGAGE((short) 5, "Mortgage") {
 		
         @Override
         public boolean isMortgage() {
@@ -97,9 +93,8 @@ public enum AccountType {
     		// TODO Auto-generated method stub
     		return this.name();
     	}
-	},
-	
-	GARANTEED_LOC {
+	}, 
+	GARANTEED_LOC((short) 6, "Guaranteed Line of Credit") {
 		
         @Override
         public boolean isGuaranteed_LOC() {
@@ -115,10 +110,8 @@ public enum AccountType {
     		// TODO Auto-generated method stub
     		return this.name();
     	}
-	},	
-	
-	//LOC = LINE OF CREDIT
-	NON_GARANTEED_LOC {
+	}, 
+	NOT_GARANTEED_LOC((short) 7, "Not Guaranteed Line of Credit") {
 		
         @Override
         public boolean isNon_Guaranteed_LOC() {
@@ -134,9 +127,8 @@ public enum AccountType {
     		// TODO Auto-generated method stub
     		return this.name();
     	}
-	},
-	
-	CREDIT_CARD {
+	}, 
+	CREDIT_CARD((short) 8, "Credit Card") {
 		
         @Override
         public boolean isCredit_Card() {
@@ -152,12 +144,17 @@ public enum AccountType {
     		// TODO Auto-generated method stub
     		return this.name();
     	}
-	};
+	}, 
+	UNKNOWN((short) 9, "Unknown status");
+	
+	public final java.lang.String name;
 
-	public int getID() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    public final Short id;
+
+    AccountType(Short i, java.lang.String name) {
+        this.name = name;
+        this.id = i;
+    }
 
 	public boolean isCredit_Card() {
 		// TODO Auto-generated method stub

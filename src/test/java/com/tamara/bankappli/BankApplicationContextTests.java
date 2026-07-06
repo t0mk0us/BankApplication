@@ -1,12 +1,10 @@
-package com.tamara.bankAppli;
+package com.tamara.bankappli;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import static org.junit.Assert.assertThrows;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.tamara.bankappli.controller.AccountController;
 import com.tamara.bankappli.service.AccountService;

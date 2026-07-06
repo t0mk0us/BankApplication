@@ -1,4 +1,4 @@
-package com.tamara.bankAppli.integration.controller;
+package com.tamara.bankappli.integration.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -16,7 +16,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockServletContext;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -30,7 +29,7 @@ import jakarta.servlet.ServletContext;
 
 @ExtendWith(SpringExtension.class)
 @WebAppConfiguration
-public class PersonControllerIT {
+public class AccountControllerIT {
 
 	@Autowired
 	private WebApplicationContext webApplicationContext;
