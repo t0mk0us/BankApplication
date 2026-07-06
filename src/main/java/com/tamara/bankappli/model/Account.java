@@ -49,31 +49,16 @@ public class Account {
 	@Column(name = "balance")
 	private Float balance;
 
-	//@Enumerated(EnumType.ORDINAL)
 	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "account_type")
 	private AccountType accountType;
 	
-//    @ManyToOne
-//    @JoinColumn(name = "account_type") // Name of your foreign key column in the database
-//    private AccountType account_Type;
-	
 	@Column(name = "management_fee")
 	private Float fees;
 	
-	/*
-	 * @Column(name = "status") private AccountStatus status;
-	 * 
-	 * @Column(name = "debit_limit") private Float debitLimit;
-	 * 
-	 * @Column(name = "monthly_payment") private Float monthly_payment;
-	 * 
-	 * @Column(name = "missed_payments") private int missedPayments;
-	 * 
-	 * @Column(name = "credit_interest") private Float credit_interest;
-	 * 
-	 * @Column(name = "debit_interest") private Float debit_interest;
-	 */
+	@Enumerated(EnumType.ORDINAL)
+	@Column(name = "account_status", columnDefinition = "tinyint")
+	private AccountStatus accStatus;
 	
 	public Account() {
 		
@@ -85,6 +70,7 @@ public class Account {
 		this.currency = currency;
 		this.balance = balance;
 		this.accountType = type;
+		this.accStatus = AccountStatus.OPEN;
 		this.fees = fees;
 	}
 	
@@ -112,28 +98,6 @@ public class Account {
 		
 		this.accountType = type;
 	}
-	
-	/*
-	 * public AccountStatus getStatus() { return status; }
-	 * 
-	 * public void setStatus(AccountStatus status) { this.status = status; }
-	 */
-
-	/*
-	 * public Float getDebitLimit() { return debitLimit; }
-	 * 
-	 * public void setDebitLimit(Float debitLimit) { this.debitLimit = debitLimit; }
-	 * 
-	 * public Float getMonthly_payment() { return monthly_payment; }
-	 * 
-	 * public void setMonthly_payment(Float monthly_payment) { this.monthly_payment
-	 * = monthly_payment; }
-	 * 
-	 * public int getMissedPayments() { return missedPayments; }
-	 * 
-	 * public void setMissedPayments(int missedPayments) { this.missedPayments =
-	 * missedPayments; }
-	 */
 
 	public Customer getOwner() { 
 	
@@ -163,18 +127,6 @@ public class Account {
 		this.balance = balance;
 	}
 
-	/*
-	 * public Float getCredit_interest() { return credit_interest; }
-	 * 
-	 * public void setCredit_interest(Float credit_interest) { this.credit_interest
-	 * = credit_interest; }
-	 * 
-	 * public Float getDebit_interest() { return debit_interest; }
-	 * 
-	 * public void setDebit_interest(Float debit_interest) { this.debit_interest =
-	 * debit_interest; }
-	 */
-
 	public Float getFees() {
 		return fees;
 	}
@@ -183,6 +135,22 @@ public class Account {
 		this.fees = fees;
 	}
 	
+	public AccountType getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(AccountType accountType) {
+		this.accountType = accountType;
+	}
+
+	public AccountStatus getStatus() {
+		return accStatus;
+	}
+
+	public void setStatus(AccountStatus status) {
+		this.accStatus = status;
+	}
+
 	@Override
 	public int hashCode() {
 		// Only use fields belonging directly to Account, or the owner object itself
